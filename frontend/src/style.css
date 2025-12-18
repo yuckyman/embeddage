@@ -46,6 +46,7 @@ html, body {
   border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
 /* loading/error */
@@ -269,17 +270,21 @@ html, body {
   border-bottom: 1px solid var(--border);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  /* let clicks/touches fall through to canvas */
-  pointer-events: none;
+}
+
+.panels {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 /* guess list */
 .guess-list {
   flex: 1;
-  overflow-y: auto;
   padding: 0;
-  /* let clicks/touches fall through to canvas */
-  pointer-events: none;
+  overflow-y: auto;
 }
 
 .guess-item {
@@ -344,6 +349,104 @@ html, body {
 /* hide scrollbar in firefox while keeping scroll behavior */
 .guess-list {
   scrollbar-width: none; /* firefox */
+}
+
+/* leaderboard */
+.leaderboard {
+  border-top: 1px solid var(--border);
+  padding: 0.75rem 1rem 1rem;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.leaderboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.leaderboard-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.leaderboard-refresh {
+  padding: 0.35rem 0.6rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.leaderboard-refresh:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.leaderboard-status {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-bottom: 0.25rem;
+  min-height: 1.2rem;
+}
+
+.leaderboard-status.error {
+  color: var(--accent);
+}
+
+.leaderboard-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.leaderboard-row:last-child {
+  border-bottom: none;
+}
+
+.leaderboard-row.self {
+  background: rgba(255, 102, 0, 0.05);
+  border-radius: 4px;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+}
+
+.lb-rank {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  align-self: center;
+}
+
+.lb-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.lb-name {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.lb-meta {
+  font-size: 0.75rem;
+  color: var(--text-dim);
 }
 
 /* mobile */

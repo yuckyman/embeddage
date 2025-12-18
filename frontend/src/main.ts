@@ -11,6 +11,7 @@ import { getTodayNY, fetchArtifacts, buildWordToId } from "./loader.ts";
 import { processGuess, isWinningGuess, normalizeGuess } from "./game.ts";
 import { SemanticScene } from "./scene.ts";
 import { GameUI } from "./ui.ts";
+import { ensurePlayer, fetchLeaderboard, syncGameState } from "./api.ts";
 import type { Artifacts, Guess } from "./types.ts";
 import "./style.css";
 
@@ -34,16 +35,77 @@ async function main() {
   // determine today's date
   const date = getTodayNY();
   console.log(`loading puzzle for: ${date}`);
-  
+
   let artifacts: Artifacts;
   let wordToId: Map<string, number>;
   let scene: SemanticScene;
   let ui: GameUI;
-  
+  let playerId: string | null = null;
+  let bestRank: number | null = null;
+  let finished = false;
+  let syncTimer: number | null = null;
+
   // track guesses to prevent duplicates
   const guessedWords = new Set<string>();
   const guesses: Guess[] = [];
-  
+
+  const ensureIdentity = async () => {
+    try {
+      const identity = await ensurePlayer();
+      playerId = identity.playerId;
+    } catch (err) {
+      console.warn("could not register player (api offline?)", err);
+    }
+  };
+
+  const pushGameState = async () => {
+    if (!playerId) {
+      await ensureIdentity();
+      if (!playerId) return;
+    }
+
+    try {
+      const res = await syncGameState(playerId, {
+        date,
+        bestRank,
+        guessCount: guesses.length,
+        finished,
+      });
+      playerId = res.player_id;
+      ui.setLeaderboard(res.leaderboard, playerId);
+    } catch (err) {
+      console.warn("failed to sync game state", err);
+    }
+  };
+
+  const scheduleSync = (immediate = false) => {
+    if (immediate) {
+      void pushGameState();
+      return;
+    }
+
+    if (syncTimer) {
+      window.clearTimeout(syncTimer);
+    }
+    syncTimer = window.setTimeout(() => {
+      syncTimer = null;
+      void pushGameState();
+    }, 800);
+  };
+
+  const refreshLeaderboard = async () => {
+    ui.showLeaderboardLoading();
+    try {
+      const leaderboard = await fetchLeaderboard(date, 25);
+      ui.setLeaderboard(leaderboard, playerId ?? undefined);
+    } catch (err) {
+      console.warn("failed to load leaderboard", err);
+      ui.showLeaderboardError("leaderboard unavailable");
+    }
+  };
+
+  await ensureIdentity();
+
   try {
     // load artifacts
     artifacts = await fetchArtifacts(date);
@@ -69,18 +131,27 @@ async function main() {
         // process guess
         const guess = processGuess(word, artifacts, wordToId);
         guesses.push(guess);
-        
+
+        if (guess.rank !== null) {
+          bestRank = bestRank === null ? guess.rank : Math.min(bestRank, guess.rank);
+        }
+
         // check for win
         const isWin = isWinningGuess(guess);
-        
+        if (isWin) {
+          finished = true;
+        }
+
         // update UI and scene
         ui.addGuess(guess, isWin);
         scene.addGuess(guess);
-        
+
         if (isWin) {
           scene.highlightWin(guess);
           console.log("🎉 winner!");
         }
+
+        scheduleSync(isWin);
       },
       onRandomWord: () => {
         const maxAttempts = 20;
@@ -111,6 +182,10 @@ async function main() {
         const guess = processGuess(word, artifacts, wordToId);
         guesses.push(guess);
 
+        if (guess.rank !== null) {
+          bestRank = bestRank === null ? guess.rank : Math.min(bestRank, guess.rank);
+        }
+
         const isWin = isWinningGuess(guess);
         ui.addGuess(guess, isWin);
         scene.addGuess(guess);
@@ -118,10 +193,16 @@ async function main() {
         if (isWin) {
           scene.highlightWin(guess);
           console.log("🎉 winner (random)!");
+          finished = true;
         }
+
+        scheduleSync(isWin);
       },
+      onRefreshLeaderboard: () => void refreshLeaderboard(),
     });
-    
+
+    void refreshLeaderboard();
+
   } catch (err) {
     console.error("failed to load puzzle:", err);
     uiContainer.innerHTML = `

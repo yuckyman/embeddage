@@ -1,0 +1,8 @@
+{
+  "name": "embeddage-worker",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250305.0"
+  }
+}

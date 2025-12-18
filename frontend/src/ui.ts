@@ -8,11 +8,12 @@
  * - error/loading states
  */
 
-import type { Guess } from "./types.ts";
+import type { Guess, LeaderboardEntry } from "./types.ts";
 
 export type UICallbacks = {
   onGuess: (word: string) => void;
   onRandomWord?: () => void;
+  onRefreshLeaderboard?: () => void;
 };
 
 export class GameUI {
@@ -23,7 +24,10 @@ export class GameUI {
   private statusEl: HTMLElement;
   private guessCountEl: HTMLElement;
   private randomBtn: HTMLButtonElement;
-  
+  private leaderboardEntries: HTMLElement;
+  private leaderboardStatus: HTMLElement;
+  private leaderboardRefresh: HTMLButtonElement;
+
   private guessCount = 0;
   private won = false;
   
@@ -57,16 +61,32 @@ export class GameUI {
       <div class="stats">
         <span class="guess-count">0 guesses</span>
       </div>
-      
-      <div class="guess-list"></div>
+
+      <div class="panels">
+        <div class="guess-list"></div>
+
+        <div class="leaderboard">
+          <div class="leaderboard-header">
+            <div class="leaderboard-title">today's leaderboard</div>
+            <button class="leaderboard-refresh" type="button">refresh</button>
+          </div>
+          <div class="leaderboard-status">loading...</div>
+          <div class="leaderboard-entries"></div>
+        </div>
+      </div>
     `;
-    
+
     this.form = this.container.querySelector(".guess-form")!;
     this.input = this.container.querySelector(".guess-input")!;
     this.guessList = this.container.querySelector(".guess-list")!;
     this.statusEl = this.container.querySelector(".status")!;
     this.guessCountEl = this.container.querySelector(".guess-count")!;
     this.randomBtn = this.container.querySelector(".random-btn") as HTMLButtonElement;
+    this.leaderboardEntries = this.container.querySelector(".leaderboard-entries")!;
+    this.leaderboardStatus = this.container.querySelector(".leaderboard-status")!;
+    this.leaderboardRefresh = this.container.querySelector(
+      ".leaderboard-refresh",
+    ) as HTMLButtonElement;
     
     // form submission
     this.form.addEventListener("submit", (e) => {
@@ -82,6 +102,10 @@ export class GameUI {
     this.randomBtn.addEventListener("click", () => {
       if (this.won) return;
       callbacks.onRandomWord?.();
+    });
+
+    this.leaderboardRefresh.addEventListener("click", () => {
+      callbacks.onRefreshLeaderboard?.();
     });
     
     // focus input
@@ -194,6 +218,53 @@ export class GameUI {
       this.statusEl.textContent = "";
       this.statusEl.classList.remove("duplicate");
     }, 2000);
+  }
+
+  showLeaderboardLoading(message = "loading leaderboard...") {
+    this.leaderboardStatus.textContent = message;
+    this.leaderboardStatus.classList.remove("error");
+    this.leaderboardEntries.innerHTML = "";
+  }
+
+  showLeaderboardError(message: string) {
+    this.leaderboardStatus.textContent = message;
+    this.leaderboardStatus.classList.add("error");
+    this.leaderboardEntries.innerHTML = "";
+  }
+
+  setLeaderboard(entries: LeaderboardEntry[], highlightPlayerId?: string) {
+    if (!entries.length) {
+      this.showLeaderboardError("no entries yet");
+      return;
+    }
+
+    this.leaderboardStatus.textContent = `top ${entries.length}`;
+    this.leaderboardStatus.classList.remove("error");
+    this.leaderboardEntries.innerHTML = "";
+
+    entries.forEach((entry, idx) => {
+      const row = document.createElement("div");
+      row.className = "leaderboard-row";
+      if (highlightPlayerId && entry.playerId === highlightPlayerId) {
+        row.classList.add("self");
+      }
+
+      const rankText = `#${idx + 1}`;
+      const name = entry.nickname?.trim() || "anon";
+      const status = entry.finished ? "finished" : "hunting";
+      const best = entry.bestRank ? `best #${entry.bestRank.toLocaleString()}` : "no rank yet";
+      const guesses = `${entry.guessCount} guess${entry.guessCount === 1 ? "" : "es"}`;
+
+      row.innerHTML = `
+        <div class="lb-rank">${rankText}</div>
+        <div class="lb-body">
+          <div class="lb-name">${escapeHtml(name)}</div>
+          <div class="lb-meta">${status} · ${best} · ${guesses}</div>
+        </div>
+      `;
+
+      this.leaderboardEntries.appendChild(row);
+    });
   }
 }
 
