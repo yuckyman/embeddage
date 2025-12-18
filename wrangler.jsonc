@@ -8,13 +8,13 @@
   "kv_namespaces": [
     {
       "binding": "PLAYERS",
-      "id": "__PLAYERS_NAMESPACE_ID__",
-      "preview_id": "__PLAYERS_PREVIEW_ID__"
+      "id": "${PLAYERS_NAMESPACE_ID}",
+      "preview_id": "${PLAYERS_PREVIEW_ID}"
     },
     {
       "binding": "LEADERBOARD",
-      "id": "__LEADERBOARD_NAMESPACE_ID__",
-      "preview_id": "__LEADERBOARD_PREVIEW_ID__"
+      "id": "${LEADERBOARD_NAMESPACE_ID}",
+      "preview_id": "${LEADERBOARD_PREVIEW_ID}"
     }
   ]
 }
