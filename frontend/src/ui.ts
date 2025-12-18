@@ -207,8 +207,8 @@ export class GameUI {
     // color bar
     const colorStyle = `rgb(${guess.color.r}, ${guess.color.g}, ${guess.color.b})`;
     
-    // rank used for sorting (descending rank so newly worse guesses sink lower)
-    const sortRank = guess.rank ?? -Infinity;
+    // rank used for sorting (ascending - lower rank is better, so best at top)
+    const sortRank = guess.rank ?? Infinity;
     item.dataset.rank = String(sortRank);
 
     if (guess.rank !== null) {
@@ -226,12 +226,12 @@ export class GameUI {
       `;
     }
     
-    // insert into list sorted by rank (desc)
+    // insert into list sorted by rank (ascending - best ranks first)
     const children = Array.from(this.guessList.children) as HTMLElement[];
     let inserted = false;
     for (const child of children) {
-      const childRank = parseFloat(child.dataset.rank ?? "-Infinity");
-      if (sortRank > childRank) {
+      const childRank = parseFloat(child.dataset.rank ?? "Infinity");
+      if (sortRank < childRank) {
         this.guessList.insertBefore(item, child);
         inserted = true;
         break;
@@ -299,7 +299,7 @@ export class GameUI {
         <div class="collective-meta">
           ${entry.isSelf ? '<span class="pill pill-self">you</span>' : ""}
           <span class="pill">${entry.count}×</span>
-          ${entry.bestRank ? `<span class="pill">best #${entry.bestRank.toLocaleString()}</span>` : ""}
+          ${entry.bestRank ? `<span class="pill">#${entry.bestRank.toLocaleString()}</span>` : ""}
         </div>
       `;
       this.collectiveList.appendChild(row);

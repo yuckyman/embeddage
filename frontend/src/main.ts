@@ -177,7 +177,16 @@ async function main() {
       }
     });
 
-    return Array.from(map.values()).sort((a, b) => b.lastSeenAt - a.lastSeenAt);
+    return Array.from(map.values()).sort((a, b) => {
+      // sort by bestRank (ascending - lower rank is better, so best at top)
+      const rankA = a.bestRank ?? Number.POSITIVE_INFINITY;
+      const rankB = b.bestRank ?? Number.POSITIVE_INFINITY;
+      if (rankA !== rankB) return rankA - rankB;
+      // then by count (descending - more popular first)
+      if (b.count !== a.count) return b.count - a.count;
+      // finally by lastSeenAt (descending - most recent first)
+      return b.lastSeenAt - a.lastSeenAt;
+    });
   };
 
   const renderCollectiveStream = () => {
