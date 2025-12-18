@@ -31,17 +31,17 @@ export class SemanticScene {
   constructor(container: HTMLElement) {
     // pure black scene
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x000000);
-    
+
     // camera
     const aspect = container.clientWidth / container.clientHeight;
     this.camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 100);
     this.camera.position.set(2.5, 2, 2.5);
     
-    // renderer - no antialiasing for sharper look
-    this.renderer = new THREE.WebGLRenderer({ antialias: false });
+    // renderer - no antialiasing for sharper look, transparent to let UI show through
+    this.renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
     this.renderer.setSize(container.clientWidth, container.clientHeight);
     this.renderer.setPixelRatio(1); // intentionally crisp
+    this.renderer.setClearColor(0x000000, 0);
     container.appendChild(this.renderer.domElement);
     
     // controls
