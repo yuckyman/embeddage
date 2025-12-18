@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+button {
+  touch-action: manipulation;
+}
+
 :root {
   --bg: #000;
   --bg-panel: #0a0a0a;
@@ -17,7 +21,7 @@
 html, body {
   height: 100%;
   font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", monospace;
-  font-size: 14px;
+  font-size: 15px;
   background: var(--bg);
   color: var(--text);
   overflow: hidden;
@@ -95,11 +99,18 @@ html, body {
 
 .mode-toggle {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border);
   font-size: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.mode-switches {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .mode-toggle label {
@@ -111,6 +122,24 @@ html, body {
   letter-spacing: 0.05em;
 }
 
+.mode-toggle-btn {
+  padding: 0.45rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 999px;
+}
+
+.mode-toggle-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .mode-toggle input[type="radio"] {
   accent-color: var(--accent);
 }
@@ -118,6 +147,68 @@ html, body {
 .mode-hint {
   color: var(--text-dim);
   font-size: 0.65rem;
+}
+
+.identity-card {
+  padding: 0.5rem 1rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.identity-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.name-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.name-input {
+  flex: 1;
+  padding: 0.45rem 0.6rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1.1rem;
+}
+
+.name-save {
+  padding: 0.45rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.name-save:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.name-status {
+  min-height: 1rem;
+  font-size: 0.75rem;
+  color: var(--text);
+}
+
+.name-status.error {
+  color: var(--accent);
+}
+
+.name-hint {
+  font-size: 0.7rem;
+  color: var(--text-dim);
 }
 
 /* form */
@@ -136,7 +227,7 @@ html, body {
   flex: 1;
   padding: 0.5rem;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   background: var(--bg);
   border: 1px solid var(--border);
   color: var(--text);
@@ -398,6 +489,38 @@ html, body {
   color: var(--text-dim);
   font-size: 0.75rem;
   border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.collective-copy {
+  flex: 1;
+}
+
+.collective-join {
+  padding: 0.35rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 999px;
+}
+
+.collective-join:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.collective-join:not(:disabled):hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .collective-row {
@@ -428,6 +551,12 @@ html, body {
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.pill-self {
+  background: rgba(255, 102, 0, 0.12);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .collective-empty {

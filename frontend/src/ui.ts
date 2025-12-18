@@ -8,13 +8,14 @@
  * - error/loading states
  */
 
-import type { CollectiveGuessEntry, Guess, LeaderboardEntry, PlayMode } from "./types.ts";
+import type { Guess, LeaderboardEntry, PlayMode, UnifiedCollectiveEntry } from "./types.ts";
 
 export type UICallbacks = {
   onGuess: (word: string) => void;
   onRandomWord?: () => void;
   onRefreshLeaderboard?: () => void;
   onModeChange?: (mode: PlayMode) => void;
+  onUpdateName?: (name: string | null) => void;
 };
 
 export class GameUI {
@@ -25,10 +26,15 @@ export class GameUI {
   private statusEl: HTMLElement;
   private guessCountEl: HTMLElement;
   private randomBtn: HTMLButtonElement;
+  private modeToggleBtn: HTMLButtonElement;
   private modeSolo: HTMLInputElement;
   private modeCollective: HTMLInputElement;
   private collectiveList: HTMLElement;
-  private collectiveStats: HTMLElement;
+  private collectiveCopy: HTMLElement;
+  private collectiveJoinBtn: HTMLButtonElement;
+  private nameForm: HTMLFormElement;
+  private nameInput: HTMLInputElement;
+  private nameStatus: HTMLElement;
   private leaderboardEntries: HTMLElement;
   private leaderboardStatus: HTMLElement;
   private leaderboardRefresh: HTMLButtonElement;
@@ -48,15 +54,35 @@ export class GameUI {
       </div>
 
       <div class="mode-toggle" role="group" aria-label="play mode">
-        <label>
-          <input type="radio" name="play-mode" value="solo" checked />
-          solo
-        </label>
-        <label>
-          <input type="radio" name="play-mode" value="collective" />
-          with everyone
-        </label>
+        <div class="mode-switches">
+          <label>
+            <input type="radio" name="play-mode" value="solo" checked />
+            solo
+          </label>
+          <label>
+            <input type="radio" name="play-mode" value="collective" />
+            with everyone
+          </label>
+        </div>
+        <button type="button" class="mode-toggle-btn">with everyone</button>
         <span class="mode-hint">opt into sharing & seeing community guesses</span>
+      </div>
+
+      <div class="identity-card">
+        <div class="identity-title">your name</div>
+        <form class="name-form">
+          <input
+            type="text"
+            class="name-input"
+            placeholder="anon"
+            maxlength="64"
+            inputmode="text"
+            autocomplete="off"
+          />
+          <button type="submit" class="name-save">save</button>
+        </form>
+        <div class="name-status"></div>
+        <div class="name-hint">shown on the leaderboard and shared guesses</div>
       </div>
 
       <form class="guess-form">
@@ -88,7 +114,10 @@ export class GameUI {
 
         <div class="collective-panel">
           <div class="panel-title">everyone's guesses</div>
-          <div class="collective-stats">join to see the crowd</div>
+          <div class="collective-stats">
+            <div class="collective-copy">join to see the crowd</div>
+            <button type="button" class="collective-join">play with everyone</button>
+          </div>
           <div class="collective-list"></div>
         </div>
 
@@ -110,13 +139,18 @@ export class GameUI {
     this.guessCountEl = this.container.querySelector(".guess-count")!;
     this.randomBtn = this.container.querySelector(".random-btn") as HTMLButtonElement;
     this.collectiveList = this.container.querySelector(".collective-list")!;
-    this.collectiveStats = this.container.querySelector(".collective-stats")!;
+    this.collectiveCopy = this.container.querySelector(".collective-copy")!;
     this.modeSolo = this.container.querySelector(
       'input[name="play-mode"][value="solo"]',
     ) as HTMLInputElement;
     this.modeCollective = this.container.querySelector(
       'input[name="play-mode"][value="collective"]',
     ) as HTMLInputElement;
+    this.modeToggleBtn = this.container.querySelector(".mode-toggle-btn") as HTMLButtonElement;
+    this.collectiveJoinBtn = this.container.querySelector(".collective-join") as HTMLButtonElement;
+    this.nameForm = this.container.querySelector(".name-form") as HTMLFormElement;
+    this.nameInput = this.container.querySelector(".name-input") as HTMLInputElement;
+    this.nameStatus = this.container.querySelector(".name-status")!;
     this.leaderboardEntries = this.container.querySelector(".leaderboard-entries")!;
     this.leaderboardStatus = this.container.querySelector(".leaderboard-status")!;
     this.leaderboardRefresh = this.container.querySelector(
@@ -147,6 +181,22 @@ export class GameUI {
     });
     this.modeCollective.addEventListener("change", () => {
       if (this.modeCollective.checked) this.setMode("collective", callbacks.onModeChange);
+    });
+    this.modeToggleBtn.addEventListener("click", () => {
+      const next = this.mode === "solo" ? "collective" : "solo";
+      this.setMode(next, callbacks.onModeChange);
+    });
+    this.collectiveJoinBtn.addEventListener("click", () => {
+      this.setMode("collective", callbacks.onModeChange);
+    });
+    this.nameForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = this.nameInput.value.trim();
+      callbacks.onUpdateName?.(name.length ? name : null);
+      this.showNameStatus("saving...");
+    });
+    this.nameInput.addEventListener("input", () => {
+      this.clearNameStatus();
     });
     // focus input
     this.input.focus();
@@ -204,22 +254,42 @@ export class GameUI {
     }
   }
 
+  setPlayerName(name: string | null) {
+    this.nameInput.value = name ?? "";
+    this.nameInput.placeholder = name ?? "anon";
+  }
+
+  showNameStatus(message: string, isError = false) {
+    this.nameStatus.textContent = message;
+    this.nameStatus.classList.toggle("error", isError);
+  }
+
+  clearNameStatus() {
+    this.nameStatus.textContent = "";
+    this.nameStatus.classList.remove("error");
+  }
+
   setMode(mode: PlayMode, notify?: (mode: PlayMode) => void) {
     this.mode = mode;
     this.modeSolo.checked = mode === "solo";
     this.modeCollective.checked = mode === "collective";
 
+    this.modeToggleBtn.textContent = mode === "collective" ? "back to solo" : "with everyone";
+    this.collectiveJoinBtn.textContent =
+      mode === "collective" ? "live with everyone" : "play with everyone";
+    this.collectiveJoinBtn.disabled = mode === "collective";
+
     if (mode === "collective") {
-      this.collectiveStats.textContent = "live crowd guesses updating";
+      this.collectiveCopy.textContent = "live crowd guesses updating";
     } else {
-      this.collectiveStats.textContent = "join to see the crowd";
+      this.collectiveCopy.textContent = "join to see the crowd";
       this.collectiveList.innerHTML = "";
     }
 
     notify?.(mode);
   }
 
-  setCollectiveGuesses(entries: CollectiveGuessEntry[]) {
+  setCollectiveGuesses(entries: UnifiedCollectiveEntry[]) {
     if (this.mode !== "collective") return;
     if (!entries.length) {
       this.collectiveList.innerHTML = "<div class=\"collective-empty\">no crowd guesses yet</div>";
@@ -233,6 +303,7 @@ export class GameUI {
       row.innerHTML = `
         <div class="collective-word">${escapeHtml(entry.word)}</div>
         <div class="collective-meta">
+          ${entry.isSelf ? '<span class="pill pill-self">you</span>' : ""}
           <span class="pill">${entry.count}×</span>
           ${entry.bestRank ? `<span class="pill">best #${entry.bestRank.toLocaleString()}</span>` : ""}
         </div>

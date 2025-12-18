@@ -27,6 +27,10 @@ export default {
       return handleRegister(request, env);
     }
 
+    if (pathname.startsWith("/api/player/nickname") && request.method === "PUT") {
+      return handleNickname(request, env);
+    }
+
     if (pathname.startsWith("/api/game-state") && request.method === "PUT") {
       return handleGameState(request, env);
     }
@@ -92,6 +96,28 @@ async function handleRegister(request: Request, env: Env): Promise<Response> {
   const nickname = await readNickname(request);
   const player = await createPlayer(env, nickname ?? undefined);
   return json({ player_id: player.playerId, nickname: player.nickname }, 201);
+}
+
+async function handleNickname(request: Request, env: Env): Promise<Response> {
+  const authResult = await authenticate(request, env);
+  if (authResult.errorResponse) return authResult.errorResponse;
+
+  const player = authResult.player!;
+  const nickname = await readNickname(request);
+  const nextNickname = nickname ?? undefined;
+
+  const updatedPlayer: PlayerRecord = { ...player, nickname: nextNickname };
+  await env.PLAYERS.put(playerKey(updatedPlayer.playerId), JSON.stringify(updatedPlayer));
+
+  // keep today's leaderboard entry in sync if it exists
+  const todayKey = leaderboardKey(getTodayNY());
+  const board = await readLeaderboard(env, todayKey);
+  if (board[player.playerId]) {
+    board[player.playerId] = { ...board[player.playerId], nickname: nextNickname };
+    await env.LEADERBOARD.put(todayKey, JSON.stringify(board));
+  }
+
+  return json({ player_id: updatedPlayer.playerId, nickname: updatedPlayer.nickname ?? null });
 }
 
 async function handleGameState(request: Request, env: Env): Promise<Response> {
