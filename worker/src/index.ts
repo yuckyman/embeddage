@@ -42,7 +42,6 @@ export default {
     if (pathname.startsWith("/api/collective") && request.method === "GET") {
       return handleCollective(request, env);
     }
-
     // fall through to static assets
     return env.ASSETS.fetch(request);
   },
@@ -76,7 +75,6 @@ type CollectiveEntry = {
 };
 
 type CollectiveMap = Record<string, CollectiveEntry>;
-
 type GameStatePayload = {
   date?: string;
   bestRank?: number | null;
@@ -90,7 +88,6 @@ type CollectivePayload = {
   rank?: number | null;
   score?: number | null;
 };
-
 async function handleRegister(request: Request, env: Env): Promise<Response> {
   const nickname = await readNickname(request);
   const player = await createPlayer(env, nickname ?? undefined);
@@ -154,6 +151,7 @@ async function handleLeaderboard(request: Request, env: Env): Promise<Response> 
   return json({ date, leaderboard });
 }
 
+<<<<<<< HEAD
 async function handleCollectiveGuess(request: Request, env: Env): Promise<Response> {
   const authResult = await authenticate(request, env);
   if (authResult.errorResponse) return authResult.errorResponse;
@@ -201,6 +199,8 @@ async function handleCollective(request: Request, env: Env): Promise<Response> {
   return json({ guesses });
 }
 
+=======
+>>>>>>> main
 async function authenticate(
   request: Request,
   env: Env,
@@ -288,7 +288,6 @@ function updateBestScore(previous: number | null, incoming: number | null): numb
   if (previous === null) return incoming;
   return Math.max(previous, incoming);
 }
-
 function updateGuessCount(previous: number, incoming: number): number {
   return Math.max(previous, incoming);
 }
@@ -300,7 +299,6 @@ function leaderboardKey(date: string): string {
 function collectiveKey(date: string): string {
   return `collective:${date}`;
 }
-
 async function readLeaderboard(env: Env, key: string): Promise<LeaderboardMap> {
   const stored = await env.LEADERBOARD.get(key);
   if (!stored) return {};
@@ -320,7 +318,6 @@ async function readCollective(env: Env, key: string): Promise<CollectiveMap> {
     return {};
   }
 }
-
 function buildLeaderboard(map: LeaderboardMap, limit: number): ScoreEntry[] {
   const entries = Object.values(map);
   entries.sort((a, b) => {
@@ -338,6 +335,7 @@ function buildLeaderboard(map: LeaderboardMap, limit: number): ScoreEntry[] {
   return entries.slice(0, limit);
 }
 
+<<<<<<< HEAD
 function buildCollectiveList(map: CollectiveMap, limit: number): CollectiveEntry[] {
   const entries = Object.values(map);
   entries.sort((a, b) => {
@@ -352,7 +350,6 @@ function buildCollectiveList(map: CollectiveMap, limit: number): CollectiveEntry
 
   return entries.slice(0, limit);
 }
-
 function getLimitFromRequest(request: Request): number {
   const url = new URL(request.url);
   const limitRaw = url.searchParams.get("limit");
@@ -374,7 +371,6 @@ function normalizeScore(score: number | null | undefined): number | null {
   const clamped = Math.max(0, Math.min(1, score));
   return clamped;
 }
-
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body, null, 2), {
     status,

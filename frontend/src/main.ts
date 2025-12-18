@@ -215,7 +215,6 @@ async function main() {
         scene.addGuess(guess);
 
         void publishCrowdGuess(guess);
-
         if (isWin) {
           scene.highlightWin(guess);
           console.log("🎉 winner!");

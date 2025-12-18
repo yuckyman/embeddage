@@ -8,13 +8,11 @@
   "kv_namespaces": [
     {
       "binding": "PLAYERS",
-      "id": "${PLAYERS_NAMESPACE_ID}",
-      "preview_id": "${PLAYERS_PREVIEW_ID}"
+      "id": "3f3b851c5eff47cfad69d8186f89d9b2"
     },
     {
       "binding": "LEADERBOARD",
-      "id": "${LEADERBOARD_NAMESPACE_ID}",
-      "preview_id": "${LEADERBOARD_PREVIEW_ID}"
+      "id": "38469e6b18c4467b87d4cbe8cb4d0ff0"
     }
   ]
 }

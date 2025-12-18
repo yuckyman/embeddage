@@ -142,14 +142,12 @@ export class GameUI {
     this.leaderboardRefresh.addEventListener("click", () => {
       callbacks.onRefreshLeaderboard?.();
     });
-
     this.modeSolo.addEventListener("change", () => {
       if (this.modeSolo.checked) this.setMode("solo", callbacks.onModeChange);
     });
     this.modeCollective.addEventListener("change", () => {
       if (this.modeCollective.checked) this.setMode("collective", callbacks.onModeChange);
     });
-
     // focus input
     this.input.focus();
   }
