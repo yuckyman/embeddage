@@ -151,7 +151,6 @@ async function handleLeaderboard(request: Request, env: Env): Promise<Response> 
   return json({ date, leaderboard });
 }
 
-<<<<<<< HEAD
 async function handleCollectiveGuess(request: Request, env: Env): Promise<Response> {
   const authResult = await authenticate(request, env);
   if (authResult.errorResponse) return authResult.errorResponse;
@@ -199,8 +198,6 @@ async function handleCollective(request: Request, env: Env): Promise<Response> {
   return json({ guesses });
 }
 
-=======
->>>>>>> main
 async function authenticate(
   request: Request,
   env: Env,
@@ -334,8 +331,6 @@ function buildLeaderboard(map: LeaderboardMap, limit: number): ScoreEntry[] {
 
   return entries.slice(0, limit);
 }
-
-<<<<<<< HEAD
 function buildCollectiveList(map: CollectiveMap, limit: number): CollectiveEntry[] {
   const entries = Object.values(map);
   entries.sort((a, b) => {
