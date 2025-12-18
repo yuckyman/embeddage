@@ -17,8 +17,15 @@ import {
   fetchLeaderboard,
   publishCollectiveGuess,
   syncGameState,
+  updateNickname,
 } from "./api.ts";
-import type { Artifacts, Guess, PlayMode } from "./types.ts";
+import type {
+  Artifacts,
+  CollectiveGuessEntry,
+  Guess,
+  PlayMode,
+  UnifiedCollectiveEntry,
+} from "./types.ts";
 import "./style.css";
 
 async function main() {
@@ -47,6 +54,7 @@ async function main() {
   let scene: SemanticScene;
   let ui: GameUI;
   let playerId: string | null = null;
+  let playerNickname: string | null = null;
   let bestRank: number | null = null;
   let finished = false;
   let syncTimer: number | null = null;
@@ -56,12 +64,21 @@ async function main() {
   // track guesses to prevent duplicates
   const guessedWords = new Set<string>();
   const guesses: Guess[] = [];
+  let crowdGuesses: CollectiveGuessEntry[] = [];
   const collectiveRendered = new Set<string>();
+
+  const applyNickname = (nickname: string | null) => {
+    playerNickname = nickname;
+    ui?.setPlayerName(nickname);
+  };
 
   const ensureIdentity = async () => {
     try {
       const identity = await ensurePlayer();
       playerId = identity.playerId;
+      if (identity.nickname !== undefined && identity.nickname !== null) {
+        applyNickname(identity.nickname);
+      }
     } catch (err) {
       console.warn("could not register player (api offline?)", err);
     }
@@ -81,6 +98,9 @@ async function main() {
         finished,
       });
       playerId = res.player_id;
+      if (res.nickname !== undefined) {
+        applyNickname(res.nickname ?? null);
+      }
       ui.setLeaderboard(res.leaderboard, playerId);
     } catch (err) {
       console.warn("failed to sync game state", err);
@@ -109,13 +129,69 @@ async function main() {
     }
   };
 
+  const mergeCollectiveGuesses = (): UnifiedCollectiveEntry[] => {
+    const map = new Map<string, UnifiedCollectiveEntry>();
+
+    crowdGuesses.forEach((entry) => {
+      map.set(entry.normalized, { ...entry, isSelf: false });
+    });
+
+    guesses.forEach((guess) => {
+      const normalized = guess.normalized;
+      const bestRank = guess.rank ?? null;
+      const bestScore = guess.score ?? null;
+      const existing = map.get(normalized);
+
+      if (existing) {
+        const nextBestRank =
+          existing.bestRank === null
+            ? bestRank
+            : bestRank === null
+              ? existing.bestRank
+              : Math.min(existing.bestRank, bestRank);
+        const nextBestScore =
+          existing.bestScore === null
+            ? bestScore
+            : bestScore === null
+              ? existing.bestScore
+              : Math.max(existing.bestScore, bestScore);
+
+        map.set(normalized, {
+          ...existing,
+          isSelf: true,
+          bestRank: nextBestRank,
+          bestScore: nextBestScore,
+          count: existing.count + (existing.isSelf ? 0 : 1),
+          lastSeenAt: Math.max(existing.lastSeenAt, guess.createdAt),
+        });
+      } else {
+        map.set(normalized, {
+          word: guess.word,
+          normalized,
+          bestRank,
+          bestScore,
+          count: 1,
+          lastSeenAt: guess.createdAt,
+          isSelf: true,
+        });
+      }
+    });
+
+    return Array.from(map.values()).sort((a, b) => b.lastSeenAt - a.lastSeenAt);
+  };
+
+  const renderCollectiveStream = () => {
+    if (playMode !== "collective") return;
+    ui.setCollectiveGuesses(mergeCollectiveGuesses());
+  };
+
   const refreshCollective = async () => {
     if (playMode !== "collective") return;
     try {
-      const crowd = await fetchCollectiveGuesses(date, 50);
-      ui.setCollectiveGuesses(crowd);
+      crowdGuesses = await fetchCollectiveGuesses(date, 50);
+      renderCollectiveStream();
 
-      crowd.forEach((entry) => {
+      crowdGuesses.forEach((entry) => {
         const normalized = normalizeGuess(entry.word);
         if (guessedWords.has(normalized) || collectiveRendered.has(normalized)) return;
 
@@ -135,6 +211,7 @@ async function main() {
     playMode = mode;
     ui.setMode(mode);
     if (mode === "collective") {
+      renderCollectiveStream();
       void refreshCollective();
     } else {
       stopCollectiveLoop();
@@ -150,6 +227,26 @@ async function main() {
     } catch (err) {
       console.warn("failed to load leaderboard", err);
       ui.showLeaderboardError("leaderboard unavailable");
+    }
+  };
+
+  const saveNickname = async (name: string | null) => {
+    if (!playerId) {
+      await ensureIdentity();
+      if (!playerId) {
+        ui.showNameStatus("try again in a bit", true);
+        return;
+      }
+    }
+
+    try {
+      const profile = await updateNickname(playerId, name);
+      applyNickname(profile.nickname ?? null);
+      ui.showNameStatus(profile.nickname ? "saved" : "cleared to anon");
+      void refreshLeaderboard();
+    } catch (err) {
+      console.warn("failed to save nickname", err);
+      ui.showNameStatus("couldn't save name", true);
     }
   };
 
@@ -214,6 +311,8 @@ async function main() {
         ui.addGuess(guess, isWin);
         scene.addGuess(guess);
 
+        renderCollectiveStream();
+
         void publishCrowdGuess(guess);
         if (isWin) {
           scene.highlightWin(guess);
@@ -259,6 +358,8 @@ async function main() {
         ui.addGuess(guess, isWin);
         scene.addGuess(guess);
 
+        renderCollectiveStream();
+
         void publishCrowdGuess(guess);
 
         if (isWin) {
@@ -273,7 +374,12 @@ async function main() {
       onModeChange: (mode) => {
         setMode(mode);
       },
+      onUpdateName: (name) => {
+        void saveNickname(name);
+      },
     });
+
+    ui.setPlayerName(playerNickname);
 
     setMode(playMode);
 

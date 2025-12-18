@@ -34,6 +34,26 @@ export async function ensurePlayer(nickname?: string): Promise<PlayerProfile> {
   return { playerId: data.player_id, nickname: data.nickname ?? null };
 }
 
+export async function updateNickname(
+  playerId: string,
+  nickname: string | null,
+): Promise<PlayerProfile> {
+  const res = await fetch(`${API_BASE}/player/nickname`, {
+    method: "PUT",
+    headers: buildHeaders(playerId),
+    body: JSON.stringify({ nickname }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`nickname update failed: ${res.status} ${text}`);
+  }
+
+  const data = (await res.json()) as { player_id: string; nickname?: string | null };
+  if (data.player_id) persistPlayerId(data.player_id);
+  return { playerId: data.player_id, nickname: data.nickname ?? null };
+}
+
 export async function syncGameState(
   playerId: string,
   payload: { date: string; bestRank: number | null; guessCount: number; finished: boolean },

@@ -61,6 +61,10 @@ export type CollectiveGuessEntry = {
   lastSeenAt: number;
 };
 
+export type UnifiedCollectiveEntry = CollectiveGuessEntry & {
+  isSelf: boolean;
+};
+
 export type LeaderboardEntry = {
   playerId: string;
   nickname?: string | null;
