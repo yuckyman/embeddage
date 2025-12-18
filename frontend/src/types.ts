@@ -45,3 +45,25 @@ export type GameState = {
   secretFound: boolean;
 };
 
+export type PlayerProfile = {
+  playerId: string;
+  nickname: string | null;
+};
+
+export type LeaderboardEntry = {
+  playerId: string;
+  nickname?: string | null;
+  date: string;
+  bestRank: number | null;
+  guessCount: number;
+  finished: boolean;
+  updatedAt: number;
+};
+
+export type SyncResponse = {
+  player_id: string;
+  nickname?: string | null;
+  entry: LeaderboardEntry;
+  leaderboard: LeaderboardEntry[];
+};
+
