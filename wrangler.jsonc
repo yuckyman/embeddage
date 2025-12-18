@@ -1,9 +1,17 @@
 {
-  "name": "embeddage",
-  "compatibility_date": "2025-12-18",
-  "assets": {
-    "directory": "./docs"
-  }
+	"name": "embeddage",
+	"compatibility_date": "2025-12-18",
+	"assets": {
+		"directory": "./docs"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "embeddage_PLAYERS",
+			"id": "3f3b851c5eff47cfad69d8186f89d9b2"
+		},
+		{
+			"binding": "embeddage_LEADERBOARD",
+			"id": "38469e6b18c4467b87d4cbe8cb4d0ff0"
+		}
+	]
 }
-
-
