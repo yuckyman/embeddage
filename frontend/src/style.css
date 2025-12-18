@@ -44,6 +44,8 @@ html, body {
   flex: 1;
   min-width: 0;
   background: var(--bg);
+  position: relative;
+  z-index: 0;
 }
 
 .ui-container {
@@ -53,6 +55,8 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* loading/error */
@@ -377,8 +381,14 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden;
   min-height: 0;
+}
+
+.panels,
+.guess-list,
+.collective-list {
+  -webkit-overflow-scrolling: touch;
 }
 
 .panel-title {
@@ -394,6 +404,13 @@ html, body {
 .guess-panel,
 .collective-panel {
   border-bottom: 1px solid var(--border);
+}
+
+.guess-panel,
+.collective-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .guess-panel.collapsed {
@@ -659,7 +676,7 @@ html, body {
     position: absolute;
     inset: 0;
     opacity: 0.4;
-    pointer-events: auto; /* allow rotating the view on touch */
+    pointer-events: none;
     height: 100%;
     flex: none;
   }
