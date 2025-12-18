@@ -65,7 +65,7 @@ export class SemanticScene {
     this.localGeometry.setDrawRange(0, 0);
     
     const localMaterial = new THREE.PointsMaterial({
-      size: 4,
+      size: 7,
       vertexColors: true,
       sizeAttenuation: false,
     });
@@ -81,7 +81,7 @@ export class SemanticScene {
     this.outerGeometry.setDrawRange(0, 0);
     
     const outerMaterial = new THREE.PointsMaterial({
-      size: 2,
+      size: 4,
       color: 0x333333,
       sizeAttenuation: false,
     });
@@ -98,6 +98,7 @@ export class SemanticScene {
     
     const trailMaterial = new THREE.LineBasicMaterial({
       color: 0x333333,
+      linewidth: 2,
     });
     this.trailLine = new THREE.Line(this.trailGeometry, trailMaterial);
     this.scene.add(this.trailLine);
@@ -105,13 +106,13 @@ export class SemanticScene {
     // minimal wireframe cube instead of sphere
     const boxGeometry = new THREE.BoxGeometry(2, 2, 2);
     const boxEdges = new THREE.EdgesGeometry(boxGeometry);
-    const boxMaterial = new THREE.LineBasicMaterial({ color: 0x222222 });
+    const boxMaterial = new THREE.LineBasicMaterial({ color: 0x222222, linewidth: 2 });
     const box = new THREE.LineSegments(boxEdges, boxMaterial);
     this.scene.add(box);
     
     // axis lines through center
     const axisLength = 1.2;
-    const axisMaterial = new THREE.LineBasicMaterial({ color: 0x1a1a1a });
+    const axisMaterial = new THREE.LineBasicMaterial({ color: 0x1a1a1a, linewidth: 2 });
     
     // x axis
     const xGeom = new THREE.BufferGeometry().setFromPoints([
@@ -210,7 +211,7 @@ export class SemanticScene {
     const { x, y, z } = guess.xyz;
     
     // simple box marker for win
-    const geometry = new THREE.BoxGeometry(0.15, 0.15, 0.15);
+    const geometry = new THREE.BoxGeometry(0.25, 0.25, 0.25);
     const edges = new THREE.EdgesGeometry(geometry);
     const material = new THREE.LineBasicMaterial({ color: 0xff6600 });
     const marker = new THREE.LineSegments(edges, material);

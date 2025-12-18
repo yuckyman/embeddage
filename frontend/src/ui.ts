@@ -12,7 +12,6 @@ import type { Guess } from "./types.ts";
 
 export type UICallbacks = {
   onGuess: (word: string) => void;
-  onGiveUp: () => void;
   onRandomWord?: () => void;
 };
 
@@ -23,12 +22,10 @@ export class GameUI {
   private guessList: HTMLElement;
   private statusEl: HTMLElement;
   private guessCountEl: HTMLElement;
-  private giveUpBtn: HTMLButtonElement;
   private randomBtn: HTMLButtonElement;
   
   private guessCount = 0;
   private won = false;
-  private gaveUp = false;
   
   constructor(container: HTMLElement, callbacks: UICallbacks) {
     this.container = container;
@@ -37,7 +34,7 @@ export class GameUI {
     this.container.innerHTML = `
       <div class="game-header">
         <h1>embeddage</h1>
-        <p class="subtitle">guess the secret word — closer meanings = higher rank</p>
+        <p class="subtitle">guess today's word! lower # is better</p>
       </div>
       
       <form class="guess-form">
@@ -53,7 +50,6 @@ export class GameUI {
           <span class="icon-die" aria-hidden="true"></span>
         </button>
         <button type="submit" class="guess-btn">guess</button>
-        <button type="button" class="giveup-btn" disabled>give up</button>
       </form>
       
       <div class="status"></div>
@@ -70,14 +66,13 @@ export class GameUI {
     this.guessList = this.container.querySelector(".guess-list")!;
     this.statusEl = this.container.querySelector(".status")!;
     this.guessCountEl = this.container.querySelector(".guess-count")!;
-    this.giveUpBtn = this.container.querySelector(".giveup-btn") as HTMLButtonElement;
     this.randomBtn = this.container.querySelector(".random-btn") as HTMLButtonElement;
     
     // form submission
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
       const word = this.input.value.trim();
-      if (word && !this.won && !this.gaveUp) {
+      if (word && !this.won) {
         callbacks.onGuess(word);
         this.input.value = "";
       }
@@ -85,14 +80,8 @@ export class GameUI {
 
     // random word button — delegates to callback
     this.randomBtn.addEventListener("click", () => {
-      if (this.won || this.gaveUp) return;
+      if (this.won) return;
       callbacks.onRandomWord?.();
-    });
-
-    // give up button
-    this.giveUpBtn.addEventListener("click", () => {
-      if (this.giveUpBtn.disabled || this.won || this.gaveUp) return;
-      callbacks.onGiveUp();
     });
     
     // focus input
@@ -175,25 +164,6 @@ export class GameUI {
     this.statusEl.classList.add("win");
   }
 
-  /**
-   * show give-up reveal
-   */
-  showGiveUp(secretWord: string) {
-    this.gaveUp = true;
-    this.input.disabled = true;
-    this.giveUpBtn.disabled = true;
-    this.giveUpBtn.classList.remove("visible");
-
-    this.statusEl.innerHTML = `
-      <div class="win-message giveup">
-        😵 you gave up — the word was <strong>${escapeHtml(secretWord)}</strong>
-        <br>
-        <span class="win-stats">you made ${this.guessCount} guess${this.guessCount === 1 ? "" : "es"}</span>
-      </div>
-    `;
-    this.statusEl.classList.add("win");
-  }
-  
   /**
    * show loading state
    */

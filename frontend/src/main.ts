@@ -40,10 +40,9 @@ async function main() {
   let scene: SemanticScene;
   let ui: GameUI;
   
-  // track guesses to prevent duplicates / give-up threshold
+  // track guesses to prevent duplicates
   const guessedWords = new Set<string>();
   const guesses: Guess[] = [];
-  let gaveUp = false;
   
   try {
     // load artifacts
@@ -58,8 +57,6 @@ async function main() {
     // set up UI
     ui = new GameUI(uiContainer, {
       onGuess: (word: string) => {
-        if (gaveUp) return;
-
         const normalized = normalizeGuess(word);
         
         // check for duplicate
@@ -85,21 +82,7 @@ async function main() {
           console.log("🎉 winner!");
         }
       },
-      onGiveUp: () => {
-        if (gaveUp) return;
-        gaveUp = true;
-
-        const secret =
-          artifacts.meta.secret_word ??
-          (artifacts.meta.secret_id !== undefined
-            ? artifacts.words[artifacts.meta.secret_id]
-            : "(unknown)");
-
-        ui.showGiveUp(secret);
-        console.log("player gave up, secret was:", secret);
-      },
       onRandomWord: () => {
-        if (gaveUp) return;
         const maxAttempts = 20;
         let attempt = 0;
         let word: string | null = null;
