@@ -1,0 +1,28 @@
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+
+# data files (large, generated)
+data/embeddings_normed.npy
+data/words.json
+*.txt
+!requirements.txt
+data/*.*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+# generated artifacts (commit selectively)
+# docs/data/*.bin
+# docs/data/*.json
+

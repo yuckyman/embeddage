@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-18",
+  "day_boundary_tz": "America/New_York",
+  "k": 256,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2381650051,
+  "secret_hash": "88f8dfa37a80ca84c18e49d923ab67d05b9a22d3d5f2b3f7caf46e767f5fe2d7",
+  "secret_id": 577,
+  "secret_word": "kong"
+}
