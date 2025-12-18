@@ -34,9 +34,13 @@ export class GameUI {
   private nameForm: HTMLFormElement;
   private nameInput: HTMLInputElement;
   private nameStatus: HTMLElement;
+  private leaderboard: HTMLElement;
   private leaderboardEntries: HTMLElement;
   private leaderboardStatus: HTMLElement;
   private leaderboardRefresh: HTMLButtonElement;
+  private leaderboardBody: HTMLElement;
+  private leaderboardTitle: HTMLButtonElement;
+  private leaderboardCollapsed = true;
 
   private guessCount = 0;
   private won = false;
@@ -112,11 +116,13 @@ export class GameUI {
 
         <div class="leaderboard">
           <div class="leaderboard-header">
-            <div class="leaderboard-title">today's leaderboard</div>
+            <button class="leaderboard-title" type="button" aria-expanded="false">today's leaderboard</button>
             <button class="leaderboard-refresh" type="button">refresh</button>
           </div>
-          <div class="leaderboard-status">loading...</div>
-          <div class="leaderboard-entries"></div>
+          <div class="leaderboard-body">
+            <div class="leaderboard-status">loading...</div>
+            <div class="leaderboard-entries"></div>
+          </div>
         </div>
       </div>
     `;
@@ -135,8 +141,11 @@ export class GameUI {
     this.nameForm = this.container.querySelector(".name-form") as HTMLFormElement;
     this.nameInput = this.container.querySelector(".name-input") as HTMLInputElement;
     this.nameStatus = this.container.querySelector(".name-status")!;
+    this.leaderboard = this.container.querySelector(".leaderboard")!;
     this.leaderboardEntries = this.container.querySelector(".leaderboard-entries")!;
     this.leaderboardStatus = this.container.querySelector(".leaderboard-status")!;
+    this.leaderboardBody = this.container.querySelector(".leaderboard-body")!;
+    this.leaderboardTitle = this.container.querySelector(".leaderboard-title") as HTMLButtonElement;
     this.leaderboardRefresh = this.container.querySelector(
       ".leaderboard-refresh",
     ) as HTMLButtonElement;
@@ -160,6 +169,9 @@ export class GameUI {
     this.leaderboardRefresh.addEventListener("click", () => {
       callbacks.onRefreshLeaderboard?.();
     });
+    this.leaderboardTitle.addEventListener("click", () => {
+      this.setLeaderboardCollapsed(!this.leaderboardCollapsed);
+    });
     this.modeToggleBtn.addEventListener("click", () => {
       const next = this.mode === "solo" ? "collective" : "solo";
       this.setMode(next, callbacks.onModeChange);
@@ -176,6 +188,8 @@ export class GameUI {
     this.nameInput.addEventListener("input", () => {
       this.clearNameStatus();
     });
+
+    this.setLeaderboardCollapsed(true);
     // focus input
     this.input.focus();
   }
@@ -393,6 +407,13 @@ export class GameUI {
 
       this.leaderboardEntries.appendChild(row);
     });
+  }
+
+  private setLeaderboardCollapsed(collapsed: boolean) {
+    this.leaderboardCollapsed = collapsed;
+    this.leaderboard.classList.toggle("collapsed", collapsed);
+    this.leaderboardTitle.setAttribute("aria-expanded", String(!collapsed));
+    this.leaderboardBody.setAttribute("aria-hidden", String(collapsed));
   }
 
 }

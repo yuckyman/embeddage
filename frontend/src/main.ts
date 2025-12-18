@@ -230,6 +230,12 @@ async function main() {
     }
   };
 
+  const maybeAutoRefreshLeaderboard = () => {
+    if (guesses.length > 0 && guesses.length % 5 === 0) {
+      void refreshLeaderboard();
+    }
+  };
+
   const saveNickname = async (name: string | null) => {
     if (!playerId) {
       await ensureIdentity();
@@ -320,6 +326,7 @@ async function main() {
         }
 
         scheduleSync(isWin);
+        maybeAutoRefreshLeaderboard();
       },
       onRandomWord: () => {
         const maxAttempts = 20;
@@ -369,6 +376,7 @@ async function main() {
         }
 
         scheduleSync(isWin);
+        maybeAutoRefreshLeaderboard();
       },
       onRefreshLeaderboard: () => void refreshLeaderboard(),
       onModeChange: (mode) => {

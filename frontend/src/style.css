@@ -588,6 +588,27 @@ html, body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-dim);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.leaderboard-title::after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.leaderboard.collapsed .leaderboard-title::after {
+  transform: rotate(-45deg);
 }
 
 .leaderboard-refresh {
@@ -618,10 +639,26 @@ html, body {
   color: var(--accent);
 }
 
+.leaderboard-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-height: 15rem;
+  overflow: hidden;
+  transition: max-height 0.2s ease, opacity 0.2s ease;
+}
+
 .leaderboard-entries {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.leaderboard.collapsed .leaderboard-body {
+  max-height: 0;
+  opacity: 0;
 }
 
 .leaderboard-row {
