@@ -134,12 +134,6 @@ export class GameUI {
     if (!inserted) {
       this.guessList.appendChild(item);
     }
-    
-    // enable give up after 50 guesses
-    if (!this.won && !this.gaveUp && this.guessCount >= 50) {
-      this.giveUpBtn.disabled = false;
-      this.giveUpBtn.classList.add("visible");
-    }
 
     if (isWin) {
       this.showWin(guess);
@@ -152,7 +146,6 @@ export class GameUI {
   private showWin(guess: Guess) {
     this.won = true;
     this.input.disabled = true;
-    this.giveUpBtn.disabled = true;
     
     this.statusEl.innerHTML = `
       <div class="win-message">
