@@ -72,6 +72,8 @@ html, body {
 .game-header {
   padding: 1rem;
   border-bottom: 1px solid var(--border);
+  /* let clicks/touches fall through to canvas */
+  pointer-events: none;
 }
 
 .game-header h1 {
@@ -225,6 +227,8 @@ html, body {
   min-height: 2rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  /* let clicks/touches fall through to canvas */
+  pointer-events: none;
 }
 
 .status.win {
@@ -265,6 +269,8 @@ html, body {
   border-bottom: 1px solid var(--border);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  /* let clicks/touches fall through to canvas */
+  pointer-events: none;
 }
 
 /* guess list */
@@ -272,6 +278,8 @@ html, body {
   flex: 1;
   overflow-y: auto;
   padding: 0;
+  /* let clicks/touches fall through to canvas */
+  pointer-events: none;
 }
 
 .guess-item {
