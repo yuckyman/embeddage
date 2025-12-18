@@ -11,8 +11,14 @@ import { getTodayNY, fetchArtifacts, buildWordToId } from "./loader.ts";
 import { processGuess, isWinningGuess, normalizeGuess } from "./game.ts";
 import { SemanticScene } from "./scene.ts";
 import { GameUI } from "./ui.ts";
-import { ensurePlayer, fetchLeaderboard, syncGameState } from "./api.ts";
-import type { Artifacts, Guess } from "./types.ts";
+import {
+  ensurePlayer,
+  fetchCollectiveGuesses,
+  fetchLeaderboard,
+  publishCollectiveGuess,
+  syncGameState,
+} from "./api.ts";
+import type { Artifacts, Guess, PlayMode } from "./types.ts";
 import "./style.css";
 
 async function main() {
@@ -44,10 +50,13 @@ async function main() {
   let bestRank: number | null = null;
   let finished = false;
   let syncTimer: number | null = null;
+  let collectiveTimer: number | null = null;
+  let playMode: PlayMode = "solo";
 
   // track guesses to prevent duplicates
   const guessedWords = new Set<string>();
   const guesses: Guess[] = [];
+  const collectiveRendered = new Set<string>();
 
   const ensureIdentity = async () => {
     try {
@@ -93,6 +102,46 @@ async function main() {
     }, 800);
   };
 
+  const stopCollectiveLoop = () => {
+    if (collectiveTimer) {
+      window.clearTimeout(collectiveTimer);
+      collectiveTimer = null;
+    }
+  };
+
+  const refreshCollective = async () => {
+    if (playMode !== "collective") return;
+    try {
+      const crowd = await fetchCollectiveGuesses(date, 50);
+      ui.setCollectiveGuesses(crowd);
+
+      crowd.forEach((entry) => {
+        const normalized = normalizeGuess(entry.word);
+        if (guessedWords.has(normalized) || collectiveRendered.has(normalized)) return;
+
+        const guess = processGuess(entry.word, artifacts, wordToId);
+        scene.addGuess(guess);
+        collectiveRendered.add(normalized);
+      });
+    } catch (err) {
+      console.warn("failed to refresh collective guesses", err);
+    } finally {
+      stopCollectiveLoop();
+      collectiveTimer = window.setTimeout(refreshCollective, 3000);
+    }
+  };
+
+  const setMode = (mode: PlayMode) => {
+    playMode = mode;
+    ui.setMode(mode);
+    if (mode === "collective") {
+      void refreshCollective();
+    } else {
+      stopCollectiveLoop();
+      collectiveRendered.clear();
+    }
+  };
+
   const refreshLeaderboard = async () => {
     ui.showLeaderboardLoading();
     try {
@@ -105,6 +154,25 @@ async function main() {
   };
 
   await ensureIdentity();
+
+  const publishCrowdGuess = async (guess: Guess) => {
+    if (playMode !== "collective") return;
+    if (!playerId) {
+      await ensureIdentity();
+      if (!playerId) return;
+    }
+
+    try {
+      await publishCollectiveGuess(playerId, {
+        date,
+        word: guess.word,
+        rank: guess.rank,
+        score: guess.score,
+      });
+    } catch (err) {
+      console.warn("failed to publish collective guess", err);
+    }
+  };
 
   try {
     // load artifacts
@@ -146,6 +214,7 @@ async function main() {
         ui.addGuess(guess, isWin);
         scene.addGuess(guess);
 
+        void publishCrowdGuess(guess);
         if (isWin) {
           scene.highlightWin(guess);
           console.log("🎉 winner!");
@@ -190,6 +259,8 @@ async function main() {
         ui.addGuess(guess, isWin);
         scene.addGuess(guess);
 
+        void publishCrowdGuess(guess);
+
         if (isWin) {
           scene.highlightWin(guess);
           console.log("🎉 winner (random)!");
@@ -199,7 +270,12 @@ async function main() {
         scheduleSync(isWin);
       },
       onRefreshLeaderboard: () => void refreshLeaderboard(),
+      onModeChange: (mode) => {
+        setMode(mode);
+      },
     });
+
+    setMode(playMode);
 
     void refreshLeaderboard();
 

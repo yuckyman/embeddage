@@ -8,12 +8,13 @@
  * - error/loading states
  */
 
-import type { Guess, LeaderboardEntry } from "./types.ts";
+import type { CollectiveGuessEntry, Guess, LeaderboardEntry, PlayMode } from "./types.ts";
 
 export type UICallbacks = {
   onGuess: (word: string) => void;
   onRandomWord?: () => void;
   onRefreshLeaderboard?: () => void;
+  onModeChange?: (mode: PlayMode) => void;
 };
 
 export class GameUI {
@@ -24,12 +25,17 @@ export class GameUI {
   private statusEl: HTMLElement;
   private guessCountEl: HTMLElement;
   private randomBtn: HTMLButtonElement;
+  private modeSolo: HTMLInputElement;
+  private modeCollective: HTMLInputElement;
+  private collectiveList: HTMLElement;
+  private collectiveStats: HTMLElement;
   private leaderboardEntries: HTMLElement;
   private leaderboardStatus: HTMLElement;
   private leaderboardRefresh: HTMLButtonElement;
 
   private guessCount = 0;
   private won = false;
+  private mode: PlayMode = "solo";
   
   constructor(container: HTMLElement, callbacks: UICallbacks) {
     this.container = container;
@@ -40,10 +46,22 @@ export class GameUI {
         <h1>embeddage</h1>
         <p class="subtitle">guess today's word! lower # is better</p>
       </div>
-      
+
+      <div class="mode-toggle" role="group" aria-label="play mode">
+        <label>
+          <input type="radio" name="play-mode" value="solo" checked />
+          solo
+        </label>
+        <label>
+          <input type="radio" name="play-mode" value="collective" />
+          with everyone
+        </label>
+        <span class="mode-hint">opt into sharing & seeing community guesses</span>
+      </div>
+
       <form class="guess-form">
-        <input 
-          type="text" 
+        <input
+          type="text"
           class="guess-input" 
           placeholder="enter a word..."
           autocomplete="off"
@@ -63,7 +81,16 @@ export class GameUI {
       </div>
 
       <div class="panels">
-        <div class="guess-list"></div>
+        <div class="guess-panel">
+          <div class="panel-title">your guesses</div>
+          <div class="guess-list"></div>
+        </div>
+
+        <div class="collective-panel">
+          <div class="panel-title">everyone's guesses</div>
+          <div class="collective-stats">join to see the crowd</div>
+          <div class="collective-list"></div>
+        </div>
 
         <div class="leaderboard">
           <div class="leaderboard-header">
@@ -82,6 +109,14 @@ export class GameUI {
     this.statusEl = this.container.querySelector(".status")!;
     this.guessCountEl = this.container.querySelector(".guess-count")!;
     this.randomBtn = this.container.querySelector(".random-btn") as HTMLButtonElement;
+    this.collectiveList = this.container.querySelector(".collective-list")!;
+    this.collectiveStats = this.container.querySelector(".collective-stats")!;
+    this.modeSolo = this.container.querySelector(
+      'input[name="play-mode"][value="solo"]',
+    ) as HTMLInputElement;
+    this.modeCollective = this.container.querySelector(
+      'input[name="play-mode"][value="collective"]',
+    ) as HTMLInputElement;
     this.leaderboardEntries = this.container.querySelector(".leaderboard-entries")!;
     this.leaderboardStatus = this.container.querySelector(".leaderboard-status")!;
     this.leaderboardRefresh = this.container.querySelector(
@@ -107,7 +142,12 @@ export class GameUI {
     this.leaderboardRefresh.addEventListener("click", () => {
       callbacks.onRefreshLeaderboard?.();
     });
-    
+    this.modeSolo.addEventListener("change", () => {
+      if (this.modeSolo.checked) this.setMode("solo", callbacks.onModeChange);
+    });
+    this.modeCollective.addEventListener("change", () => {
+      if (this.modeCollective.checked) this.setMode("collective", callbacks.onModeChange);
+    });
     // focus input
     this.input.focus();
   }
@@ -162,6 +202,43 @@ export class GameUI {
     if (isWin) {
       this.showWin(guess);
     }
+  }
+
+  setMode(mode: PlayMode, notify?: (mode: PlayMode) => void) {
+    this.mode = mode;
+    this.modeSolo.checked = mode === "solo";
+    this.modeCollective.checked = mode === "collective";
+
+    if (mode === "collective") {
+      this.collectiveStats.textContent = "live crowd guesses updating";
+    } else {
+      this.collectiveStats.textContent = "join to see the crowd";
+      this.collectiveList.innerHTML = "";
+    }
+
+    notify?.(mode);
+  }
+
+  setCollectiveGuesses(entries: CollectiveGuessEntry[]) {
+    if (this.mode !== "collective") return;
+    if (!entries.length) {
+      this.collectiveList.innerHTML = "<div class=\"collective-empty\">no crowd guesses yet</div>";
+      return;
+    }
+
+    this.collectiveList.innerHTML = "";
+    entries.forEach((entry) => {
+      const row = document.createElement("div");
+      row.className = "collective-row";
+      row.innerHTML = `
+        <div class="collective-word">${escapeHtml(entry.word)}</div>
+        <div class="collective-meta">
+          <span class="pill">${entry.count}×</span>
+          ${entry.bestRank ? `<span class="pill">best #${entry.bestRank.toLocaleString()}</span>` : ""}
+        </div>
+      `;
+      this.collectiveList.appendChild(row);
+    });
   }
   
   /**

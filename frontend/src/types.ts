@@ -50,6 +50,17 @@ export type PlayerProfile = {
   nickname: string | null;
 };
 
+export type PlayMode = "solo" | "collective";
+
+export type CollectiveGuessEntry = {
+  word: string;
+  normalized: string;
+  bestRank: number | null;
+  bestScore: number | null;
+  count: number;
+  lastSeenAt: number;
+};
+
 export type LeaderboardEntry = {
   playerId: string;
   nickname?: string | null;

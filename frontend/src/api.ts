@@ -1,4 +1,9 @@
-import type { LeaderboardEntry, PlayerProfile, SyncResponse } from "./types.ts";
+import type {
+  CollectiveGuessEntry,
+  LeaderboardEntry,
+  PlayerProfile,
+  SyncResponse,
+} from "./types.ts";
 
 const PLAYER_STORAGE_KEY = "embeddage_player_id";
 const API_BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? "/api";
@@ -66,4 +71,32 @@ function buildHeaders(playerId: string): HeadersInit {
     "Content-Type": "application/json",
     Authorization: `Bearer ${playerId}`,
   };
+}
+
+export async function publishCollectiveGuess(
+  playerId: string,
+  payload: { date: string; word: string; rank: number | null; score: number | null },
+): Promise<void> {
+  const res = await fetch(`${API_BASE}/collective/guess`, {
+    method: "POST",
+    headers: buildHeaders(playerId),
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`collective publish failed: ${res.status} ${text}`);
+  }
+}
+
+export async function fetchCollectiveGuesses(
+  date: string,
+  limit = 50,
+): Promise<CollectiveGuessEntry[]> {
+  const res = await fetch(
+    `${API_BASE}/collective?date=${encodeURIComponent(date)}&limit=${limit}`,
+  );
+  if (!res.ok) throw new Error(`collective fetch failed: ${res.status}`);
+  const data = (await res.json()) as { guesses: CollectiveGuessEntry[] };
+  return data.guesses;
 }

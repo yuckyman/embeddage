@@ -93,6 +93,33 @@ html, body {
   letter-spacing: 0.05em;
 }
 
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.75rem;
+}
+
+.mode-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mode-toggle input[type="radio"] {
+  accent-color: var(--accent);
+}
+
+.mode-hint {
+  color: var(--text-dim);
+  font-size: 0.65rem;
+}
+
 /* form */
 .guess-form {
   display: flex;
@@ -280,8 +307,23 @@ html, body {
   min-height: 0;
 }
 
+.panel-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
 /* guess list */
-.guess-list {
+.guess-panel,
+.collective-panel {
+  border-bottom: 1px solid var(--border);
+}
+
+.guess-list,
+.collective-list {
   flex: 1;
   padding: 0;
   overflow-y: auto;
@@ -351,6 +393,48 @@ html, body {
   scrollbar-width: none; /* firefox */
 }
 
+.collective-stats {
+  padding: 0.5rem 1rem;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.collective-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  gap: 0.5rem;
+}
+
+.collective-word {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.collective-meta {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.pill {
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.35rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.collective-empty {
+  padding: 0.75rem 1rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
 /* leaderboard */
 .leaderboard {
   border-top: 1px solid var(--border);

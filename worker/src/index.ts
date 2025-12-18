@@ -35,6 +35,13 @@ export default {
       return handleLeaderboard(request, env);
     }
 
+    if (pathname.startsWith("/api/collective/guess") && request.method === "POST") {
+      return handleCollectiveGuess(request, env);
+    }
+
+    if (pathname.startsWith("/api/collective") && request.method === "GET") {
+      return handleCollective(request, env);
+    }
     // fall through to static assets
     return env.ASSETS.fetch(request);
   },
@@ -58,6 +65,16 @@ type ScoreEntry = {
 
 type LeaderboardMap = Record<string, ScoreEntry>;
 
+type CollectiveEntry = {
+  word: string;
+  normalized: string;
+  bestRank: number | null;
+  bestScore: number | null;
+  count: number;
+  lastSeenAt: number;
+};
+
+type CollectiveMap = Record<string, CollectiveEntry>;
 type GameStatePayload = {
   date?: string;
   bestRank?: number | null;
@@ -65,6 +82,12 @@ type GameStatePayload = {
   finished?: boolean;
 };
 
+type CollectivePayload = {
+  date?: string;
+  word?: string;
+  rank?: number | null;
+  score?: number | null;
+};
 async function handleRegister(request: Request, env: Env): Promise<Response> {
   const nickname = await readNickname(request);
   const player = await createPlayer(env, nickname ?? undefined);
@@ -128,6 +151,56 @@ async function handleLeaderboard(request: Request, env: Env): Promise<Response> 
   return json({ date, leaderboard });
 }
 
+<<<<<<< HEAD
+async function handleCollectiveGuess(request: Request, env: Env): Promise<Response> {
+  const authResult = await authenticate(request, env);
+  if (authResult.errorResponse) return authResult.errorResponse;
+
+  const payload = (await readJson<CollectivePayload>(request)) ?? {};
+  const date = payload.date ?? null;
+  if (!date) return json({ error: "missing date" }, 400);
+
+  const today = getTodayNY();
+  if (date !== today) return json({ error: `date mismatch; expected ${today}` }, 400);
+
+  const word = normalizeWord(payload.word);
+  if (!word) return json({ error: "missing word" }, 400);
+
+  const bestRank = normalizeRank(payload.rank);
+  const bestScore = normalizeScore(payload.score);
+
+  const key = collectiveKey(date);
+  const crowdMap = await readCollective(env, key);
+  const prev = crowdMap[word];
+  const now = Date.now();
+
+  const entry: CollectiveEntry = {
+    word,
+    normalized: word,
+    bestRank: updateBestRank(prev?.bestRank ?? null, bestRank),
+    bestScore: updateBestScore(prev?.bestScore ?? null, bestScore),
+    count: (prev?.count ?? 0) + 1,
+    lastSeenAt: now,
+  };
+
+  crowdMap[word] = entry;
+  await env.LEADERBOARD.put(key, JSON.stringify(crowdMap));
+
+  const guesses = buildCollectiveList(crowdMap, getLimitFromRequest(request));
+  return json({ guesses });
+}
+
+async function handleCollective(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const date = url.searchParams.get("date") ?? getTodayNY();
+  const key = collectiveKey(date);
+  const crowdMap = await readCollective(env, key);
+  const guesses = buildCollectiveList(crowdMap, getLimitFromRequest(request));
+  return json({ guesses });
+}
+
+=======
+>>>>>>> main
 async function authenticate(
   request: Request,
   env: Env,
@@ -210,6 +283,11 @@ function updateBestRank(previous: number | null, incoming: number | null): numbe
   return Math.min(previous, incoming);
 }
 
+function updateBestScore(previous: number | null, incoming: number | null): number | null {
+  if (incoming === null) return previous;
+  if (previous === null) return incoming;
+  return Math.max(previous, incoming);
+}
 function updateGuessCount(previous: number, incoming: number): number {
   return Math.max(previous, incoming);
 }
@@ -218,6 +296,9 @@ function leaderboardKey(date: string): string {
   return `leaderboard:${date}`;
 }
 
+function collectiveKey(date: string): string {
+  return `collective:${date}`;
+}
 async function readLeaderboard(env: Env, key: string): Promise<LeaderboardMap> {
   const stored = await env.LEADERBOARD.get(key);
   if (!stored) return {};
@@ -228,6 +309,15 @@ async function readLeaderboard(env: Env, key: string): Promise<LeaderboardMap> {
   }
 }
 
+async function readCollective(env: Env, key: string): Promise<CollectiveMap> {
+  const stored = await env.LEADERBOARD.get(key);
+  if (!stored) return {};
+  try {
+    return JSON.parse(stored) as CollectiveMap;
+  } catch {
+    return {};
+  }
+}
 function buildLeaderboard(map: LeaderboardMap, limit: number): ScoreEntry[] {
   const entries = Object.values(map);
   entries.sort((a, b) => {
@@ -245,6 +335,21 @@ function buildLeaderboard(map: LeaderboardMap, limit: number): ScoreEntry[] {
   return entries.slice(0, limit);
 }
 
+<<<<<<< HEAD
+function buildCollectiveList(map: CollectiveMap, limit: number): CollectiveEntry[] {
+  const entries = Object.values(map);
+  entries.sort((a, b) => {
+    if (b.count !== a.count) return b.count - a.count;
+
+    const rankA = a.bestRank ?? Number.POSITIVE_INFINITY;
+    const rankB = b.bestRank ?? Number.POSITIVE_INFINITY;
+    if (rankA !== rankB) return rankA - rankB;
+
+    return a.lastSeenAt - b.lastSeenAt;
+  });
+
+  return entries.slice(0, limit);
+}
 function getLimitFromRequest(request: Request): number {
   const url = new URL(request.url);
   const limitRaw = url.searchParams.get("limit");
@@ -253,6 +358,19 @@ function getLimitFromRequest(request: Request): number {
   return Math.min(limit, 200);
 }
 
+function normalizeWord(word: unknown): string | null {
+  if (typeof word !== "string") return null;
+  const trimmed = word.trim().toLowerCase();
+  if (!trimmed || trimmed.length > 64) return null;
+  return trimmed;
+}
+
+function normalizeScore(score: number | null | undefined): number | null {
+  if (score === null || score === undefined) return null;
+  if (typeof score !== "number" || !Number.isFinite(score)) return null;
+  const clamped = Math.max(0, Math.min(1, score));
+  return clamped;
+}
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body, null, 2), {
     status,
