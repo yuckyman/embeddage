@@ -6,11 +6,11 @@
 	},
 	"kv_namespaces": [
 		{
-			"binding": "embeddage_PLAYERS",
+			"binding": "PLAYERS",
 			"id": "3f3b851c5eff47cfad69d8186f89d9b2"
 		},
 		{
-			"binding": "embeddage_LEADERBOARD",
+			"binding": "LEADERBOARD",
 			"id": "38469e6b18c4467b87d4cbe8cb4d0ff0"
 		}
 	]
