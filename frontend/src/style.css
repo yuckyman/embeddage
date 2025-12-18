@@ -25,6 +25,8 @@ html, body {
   background: var(--bg);
   color: var(--text);
   overflow: hidden;
+  /* prevent accidental double-tap zoom on mobile */
+  touch-action: manipulation;
 }
 
 #app {
@@ -42,6 +44,8 @@ html, body {
   flex: 1;
   min-width: 0;
   background: var(--bg);
+  position: relative;
+  z-index: 0;
 }
 
 .ui-container {
@@ -51,6 +55,8 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* loading/error */
@@ -99,27 +105,12 @@ html, body {
 
 .mode-toggle {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border);
   font-size: 0.75rem;
   flex-wrap: wrap;
-}
-
-.mode-switches {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.mode-toggle label {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .mode-toggle-btn {
@@ -138,10 +129,6 @@ html, body {
 .mode-toggle-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
-}
-
-.mode-toggle input[type="radio"] {
-  accent-color: var(--accent);
 }
 
 .mode-hint {
@@ -394,8 +381,14 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden;
   min-height: 0;
+}
+
+.panels,
+.guess-list,
+.collective-list {
+  -webkit-overflow-scrolling: touch;
 }
 
 .panel-title {
@@ -411,6 +404,17 @@ html, body {
 .guess-panel,
 .collective-panel {
   border-bottom: 1px solid var(--border);
+}
+
+.guess-panel,
+.collective-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.guess-panel.collapsed {
+  display: none;
 }
 
 .guess-list,
@@ -584,6 +588,27 @@ html, body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-dim);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.leaderboard-title::after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.leaderboard.collapsed .leaderboard-title::after {
+  transform: rotate(-45deg);
 }
 
 .leaderboard-refresh {
@@ -614,10 +639,26 @@ html, body {
   color: var(--accent);
 }
 
+.leaderboard-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-height: 15rem;
+  overflow: hidden;
+  transition: max-height 0.2s ease, opacity 0.2s ease;
+}
+
 .leaderboard-entries {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.leaderboard.collapsed .leaderboard-body {
+  max-height: 0;
+  opacity: 0;
 }
 
 .leaderboard-row {
@@ -672,7 +713,7 @@ html, body {
     position: absolute;
     inset: 0;
     opacity: 0.4;
-    pointer-events: auto; /* allow rotating the view on touch */
+    pointer-events: none;
     height: 100%;
     flex: none;
   }

@@ -23,21 +23,24 @@ export class GameUI {
   private input: HTMLInputElement;
   private form: HTMLFormElement;
   private guessList: HTMLElement;
+  private guessPanel: HTMLElement;
   private statusEl: HTMLElement;
   private guessCountEl: HTMLElement;
   private randomBtn: HTMLButtonElement;
   private modeToggleBtn: HTMLButtonElement;
-  private modeSolo: HTMLInputElement;
-  private modeCollective: HTMLInputElement;
   private collectiveList: HTMLElement;
   private collectiveCopy: HTMLElement;
   private collectiveJoinBtn: HTMLButtonElement;
   private nameForm: HTMLFormElement;
   private nameInput: HTMLInputElement;
   private nameStatus: HTMLElement;
+  private leaderboard: HTMLElement;
   private leaderboardEntries: HTMLElement;
   private leaderboardStatus: HTMLElement;
   private leaderboardRefresh: HTMLButtonElement;
+  private leaderboardBody: HTMLElement;
+  private leaderboardTitle: HTMLButtonElement;
+  private leaderboardCollapsed = true;
 
   private guessCount = 0;
   private won = false;
@@ -54,16 +57,6 @@ export class GameUI {
       </div>
 
       <div class="mode-toggle" role="group" aria-label="play mode">
-        <div class="mode-switches">
-          <label>
-            <input type="radio" name="play-mode" value="solo" checked />
-            solo
-          </label>
-          <label>
-            <input type="radio" name="play-mode" value="collective" />
-            with everyone
-          </label>
-        </div>
         <button type="button" class="mode-toggle-btn">with everyone</button>
         <span class="mode-hint">opt into sharing & seeing community guesses</span>
       </div>
@@ -123,40 +116,40 @@ export class GameUI {
 
         <div class="leaderboard">
           <div class="leaderboard-header">
-            <div class="leaderboard-title">today's leaderboard</div>
+            <button class="leaderboard-title" type="button" aria-expanded="false">today's leaderboard</button>
             <button class="leaderboard-refresh" type="button">refresh</button>
           </div>
-          <div class="leaderboard-status">loading...</div>
-          <div class="leaderboard-entries"></div>
+          <div class="leaderboard-body">
+            <div class="leaderboard-status">loading...</div>
+            <div class="leaderboard-entries"></div>
+          </div>
         </div>
       </div>
     `;
 
     this.form = this.container.querySelector(".guess-form")!;
     this.input = this.container.querySelector(".guess-input")!;
+    this.guessPanel = this.container.querySelector(".guess-panel")!;
     this.guessList = this.container.querySelector(".guess-list")!;
     this.statusEl = this.container.querySelector(".status")!;
     this.guessCountEl = this.container.querySelector(".guess-count")!;
     this.randomBtn = this.container.querySelector(".random-btn") as HTMLButtonElement;
     this.collectiveList = this.container.querySelector(".collective-list")!;
     this.collectiveCopy = this.container.querySelector(".collective-copy")!;
-    this.modeSolo = this.container.querySelector(
-      'input[name="play-mode"][value="solo"]',
-    ) as HTMLInputElement;
-    this.modeCollective = this.container.querySelector(
-      'input[name="play-mode"][value="collective"]',
-    ) as HTMLInputElement;
     this.modeToggleBtn = this.container.querySelector(".mode-toggle-btn") as HTMLButtonElement;
     this.collectiveJoinBtn = this.container.querySelector(".collective-join") as HTMLButtonElement;
     this.nameForm = this.container.querySelector(".name-form") as HTMLFormElement;
     this.nameInput = this.container.querySelector(".name-input") as HTMLInputElement;
     this.nameStatus = this.container.querySelector(".name-status")!;
+    this.leaderboard = this.container.querySelector(".leaderboard")!;
     this.leaderboardEntries = this.container.querySelector(".leaderboard-entries")!;
     this.leaderboardStatus = this.container.querySelector(".leaderboard-status")!;
+    this.leaderboardBody = this.container.querySelector(".leaderboard-body")!;
+    this.leaderboardTitle = this.container.querySelector(".leaderboard-title") as HTMLButtonElement;
     this.leaderboardRefresh = this.container.querySelector(
       ".leaderboard-refresh",
     ) as HTMLButtonElement;
-    
+
     // form submission
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -176,11 +169,8 @@ export class GameUI {
     this.leaderboardRefresh.addEventListener("click", () => {
       callbacks.onRefreshLeaderboard?.();
     });
-    this.modeSolo.addEventListener("change", () => {
-      if (this.modeSolo.checked) this.setMode("solo", callbacks.onModeChange);
-    });
-    this.modeCollective.addEventListener("change", () => {
-      if (this.modeCollective.checked) this.setMode("collective", callbacks.onModeChange);
+    this.leaderboardTitle.addEventListener("click", () => {
+      this.setLeaderboardCollapsed(!this.leaderboardCollapsed);
     });
     this.modeToggleBtn.addEventListener("click", () => {
       const next = this.mode === "solo" ? "collective" : "solo";
@@ -198,6 +188,8 @@ export class GameUI {
     this.nameInput.addEventListener("input", () => {
       this.clearNameStatus();
     });
+
+    this.setLeaderboardCollapsed(true);
     // focus input
     this.input.focus();
   }
@@ -215,9 +207,9 @@ export class GameUI {
     // color bar
     const colorStyle = `rgb(${guess.color.r}, ${guess.color.g}, ${guess.color.b})`;
     
-    // score used for sorting by semantic similarity (descending)
-    const sortScore = guess.score ?? -1;
-    item.dataset.score = String(sortScore);
+    // rank used for sorting (descending rank so newly worse guesses sink lower)
+    const sortRank = guess.rank ?? -Infinity;
+    item.dataset.rank = String(sortRank);
 
     if (guess.rank !== null) {
       item.innerHTML = `
@@ -234,12 +226,12 @@ export class GameUI {
       `;
     }
     
-    // insert into list sorted by semantic similarity (score desc)
+    // insert into list sorted by rank (desc)
     const children = Array.from(this.guessList.children) as HTMLElement[];
     let inserted = false;
     for (const child of children) {
-      const childScore = parseFloat(child.dataset.score ?? "-1");
-      if (sortScore > childScore) {
+      const childRank = parseFloat(child.dataset.rank ?? "-Infinity");
+      if (sortRank > childRank) {
         this.guessList.insertBefore(item, child);
         inserted = true;
         break;
@@ -271,8 +263,10 @@ export class GameUI {
 
   setMode(mode: PlayMode, notify?: (mode: PlayMode) => void) {
     this.mode = mode;
-    this.modeSolo.checked = mode === "solo";
-    this.modeCollective.checked = mode === "collective";
+
+    this.container.classList.toggle("mode-collective", mode === "collective");
+    this.container.classList.toggle("mode-solo", mode === "solo");
+    this.guessPanel.classList.toggle("collapsed", mode === "collective");
 
     this.modeToggleBtn.textContent = mode === "collective" ? "back to solo" : "with everyone";
     this.collectiveJoinBtn.textContent =
@@ -414,6 +408,14 @@ export class GameUI {
       this.leaderboardEntries.appendChild(row);
     });
   }
+
+  private setLeaderboardCollapsed(collapsed: boolean) {
+    this.leaderboardCollapsed = collapsed;
+    this.leaderboard.classList.toggle("collapsed", collapsed);
+    this.leaderboardTitle.setAttribute("aria-expanded", String(!collapsed));
+    this.leaderboardBody.setAttribute("aria-hidden", String(collapsed));
+  }
+
 }
 
 function escapeHtml(str: string): string {
