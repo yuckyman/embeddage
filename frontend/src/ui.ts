@@ -28,8 +28,6 @@ export class GameUI {
   private guessCountEl: HTMLElement;
   private randomBtn: HTMLButtonElement;
   private modeToggleBtn: HTMLButtonElement;
-  private modeSolo: HTMLInputElement;
-  private modeCollective: HTMLInputElement;
   private collectiveList: HTMLElement;
   private collectiveCopy: HTMLElement;
   private collectiveJoinBtn: HTMLButtonElement;
@@ -55,16 +53,6 @@ export class GameUI {
       </div>
 
       <div class="mode-toggle" role="group" aria-label="play mode">
-        <div class="mode-switches">
-          <label>
-            <input type="radio" name="play-mode" value="solo" checked />
-            solo
-          </label>
-          <label>
-            <input type="radio" name="play-mode" value="collective" />
-            with everyone
-          </label>
-        </div>
         <button type="button" class="mode-toggle-btn">with everyone</button>
         <span class="mode-hint">opt into sharing & seeing community guesses</span>
       </div>
@@ -142,12 +130,6 @@ export class GameUI {
     this.randomBtn = this.container.querySelector(".random-btn") as HTMLButtonElement;
     this.collectiveList = this.container.querySelector(".collective-list")!;
     this.collectiveCopy = this.container.querySelector(".collective-copy")!;
-    this.modeSolo = this.container.querySelector(
-      'input[name="play-mode"][value="solo"]',
-    ) as HTMLInputElement;
-    this.modeCollective = this.container.querySelector(
-      'input[name="play-mode"][value="collective"]',
-    ) as HTMLInputElement;
     this.modeToggleBtn = this.container.querySelector(".mode-toggle-btn") as HTMLButtonElement;
     this.collectiveJoinBtn = this.container.querySelector(".collective-join") as HTMLButtonElement;
     this.nameForm = this.container.querySelector(".name-form") as HTMLFormElement;
@@ -159,14 +141,6 @@ export class GameUI {
       ".leaderboard-refresh",
     ) as HTMLButtonElement;
 
-    this.disableDoubleTapZoom([
-      this.randomBtn,
-      this.modeToggleBtn,
-      this.collectiveJoinBtn,
-      this.leaderboardRefresh,
-      this.nameForm,
-    ]);
-    
     // form submission
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -185,12 +159,6 @@ export class GameUI {
 
     this.leaderboardRefresh.addEventListener("click", () => {
       callbacks.onRefreshLeaderboard?.();
-    });
-    this.modeSolo.addEventListener("change", () => {
-      if (this.modeSolo.checked) this.setMode("solo", callbacks.onModeChange);
-    });
-    this.modeCollective.addEventListener("change", () => {
-      if (this.modeCollective.checked) this.setMode("collective", callbacks.onModeChange);
     });
     this.modeToggleBtn.addEventListener("click", () => {
       const next = this.mode === "solo" ? "collective" : "solo";
@@ -281,8 +249,6 @@ export class GameUI {
 
   setMode(mode: PlayMode, notify?: (mode: PlayMode) => void) {
     this.mode = mode;
-    this.modeSolo.checked = mode === "solo";
-    this.modeCollective.checked = mode === "collective";
 
     this.container.classList.toggle("mode-collective", mode === "collective");
     this.container.classList.toggle("mode-solo", mode === "solo");
@@ -429,22 +395,6 @@ export class GameUI {
     });
   }
 
-  private disableDoubleTapZoom(targets: HTMLElement[]) {
-    targets.forEach((target) => {
-      let lastTouch = 0;
-      target.addEventListener(
-        "touchend",
-        (event) => {
-          const now = Date.now();
-          if (now - lastTouch < 350) {
-            event.preventDefault();
-          }
-          lastTouch = now;
-        },
-        { passive: false },
-      );
-    });
-  }
 }
 
 function escapeHtml(str: string): string {
