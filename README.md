@@ -81,3 +81,12 @@ binary file, no header. `k * 3` little-endian float32 values. coordinates are ro
 - [ ] github actions for daily builds
 - [ ] custom domain setup
 
+
+## cloudflare worker config
+
+Set the KV namespace IDs used by the worker via environment variables before running `wrangler deploy` or `wrangler versions upload`:
+
+- `PLAYERS_NAMESPACE_ID` / `PLAYERS_PREVIEW_ID`
+- `LEADERBOARD_NAMESPACE_ID` / `LEADERBOARD_PREVIEW_ID`
+
+Each should point to an existing Workers KV namespace (create via `wrangler kv namespace create <name>`). Without these values, deployment will fail with an invalid namespace error.

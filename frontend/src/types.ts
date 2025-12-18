@@ -45,3 +45,36 @@ export type GameState = {
   secretFound: boolean;
 };
 
+export type PlayerProfile = {
+  playerId: string;
+  nickname: string | null;
+};
+
+export type PlayMode = "solo" | "collective";
+
+export type CollectiveGuessEntry = {
+  word: string;
+  normalized: string;
+  bestRank: number | null;
+  bestScore: number | null;
+  count: number;
+  lastSeenAt: number;
+};
+
+export type LeaderboardEntry = {
+  playerId: string;
+  nickname?: string | null;
+  date: string;
+  bestRank: number | null;
+  guessCount: number;
+  finished: boolean;
+  updatedAt: number;
+};
+
+export type SyncResponse = {
+  player_id: string;
+  nickname?: string | null;
+  entry: LeaderboardEntry;
+  leaderboard: LeaderboardEntry[];
+};
+
