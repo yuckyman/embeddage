@@ -341,7 +341,21 @@ html, body {
   .ui-container {
     width: 100%;
     flex: 1;
+    min-height: 0;
     border-left: none;
     border-top: 1px solid var(--border);
+  }
+
+  .guess-form {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--bg-panel);
+  }
+
+  .guess-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
   }
 }
