@@ -30,7 +30,6 @@ html, body {
 /* layout */
 .layout {
   display: flex;
-  flex-direction: column;
   height: 100%;
   position: relative;
 }
@@ -39,21 +38,14 @@ html, body {
   flex: 1;
   min-width: 0;
   background: var(--bg);
-  position: absolute;
-  inset: 0;
-  opacity: 0.4;
-  pointer-events: none;
 }
 
 .ui-container {
-  width: 100%;
-  background: rgba(10, 10, 10, 0.9);
-  border-left: none;
-  border-top: 1px solid var(--border);
+  width: 320px;
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 0;
 }
 
 /* loading/error */
@@ -348,6 +340,35 @@ html, body {
 
 /* mobile */
 @media (max-width: 768px) {
+  .layout {
+    flex-direction: column-reverse;
+  }
+
+  .scene-container {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    pointer-events: auto; /* allow rotating the view on touch */
+    height: 100%;
+    flex: none;
+  }
+
+  .ui-container {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    background: rgba(10, 10, 10, 0.9);
+  }
+
+  .guess-form {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--bg-panel);
+  }
+
   .guess-list {
     flex: 1;
     min-height: 0;
