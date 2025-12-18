@@ -36,7 +36,7 @@ export class GameUI {
     // build the UI structure
     this.container.innerHTML = `
       <div class="game-header">
-        <h1>semantle</h1>
+        <h1>embeddage</h1>
         <p class="subtitle">guess the secret word — closer meanings = higher rank</p>
       </div>
       

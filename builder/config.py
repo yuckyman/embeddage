@@ -1,5 +1,5 @@
 """
-configuration constants for the semantle builder.
+configuration constants for the embeddage builder.
 
 all the magic numbers live here so they're easy to tweak.
 """

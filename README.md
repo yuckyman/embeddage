@@ -1,4 +1,4 @@
-# semantle
+# embeddage
 
 a word-guessing game with 3d visualization. guess the secret word — each guess shows how semantically close you are based on GloVe embeddings.
 
@@ -50,7 +50,7 @@ cd docs && python -m http.server 8000
 ## project structure
 
 ```
-semantle/
+embeddage/
 ├── builder/           # python modules
 │   ├── config.py      # constants and paths
 │   ├── embeddings.py  # load/preprocess GloVe

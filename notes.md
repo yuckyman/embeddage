@@ -1,4 +1,4 @@
-# semantle build notes
+# embeddage build notes
 
 ## section 1 — python offline builder (artifacts for a single day)
 
@@ -209,7 +209,7 @@
 ## file structure (final)
 
 ```
-semantle/
+embeddage/
 ├── builder/
 │   ├── __init__.py
 │   ├── config.py          # embed_dim=100, k=256, etc.

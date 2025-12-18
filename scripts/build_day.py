@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-build daily artifacts for semantle.
+build daily artifacts for embeddage.
 
 usage:
     python scripts/build_day.py --date 2024-12-18
@@ -49,7 +49,7 @@ def get_today_ny() -> str:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="generate daily semantle artifacts"
+        description="generate daily embeddage artifacts"
     )
     parser.add_argument(
         "--date",

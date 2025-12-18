@@ -1,5 +1,5 @@
 """
-semantle daily artifact builder
+embeddage daily artifact builder
 
 generates precomputed rankings, projections, and metadata
 for a word-guessing game based on GloVe embeddings.

@@ -1,7 +1,7 @@
 """
 compute rankings and top-k neighborhood for a secret word.
 
-this is the core semantle logic: given a secret, rank all words
+this is the core embeddage logic: given a secret, rank all words
 by cosine similarity and extract the closest neighbors.
 """
 
