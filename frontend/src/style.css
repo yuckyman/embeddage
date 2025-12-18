@@ -317,15 +317,21 @@ html, body {
 
 /* scrollbar */
 .guess-list::-webkit-scrollbar {
-  width: 4px;
+  width: 0;
+  height: 0;
 }
 
 .guess-list::-webkit-scrollbar-track {
-  background: var(--bg);
+  background: transparent;
 }
 
 .guess-list::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: transparent;
+}
+
+/* hide scrollbar in firefox while keeping scroll behavior */
+.guess-list {
+  scrollbar-width: none; /* firefox */
 }
 
 /* mobile */
