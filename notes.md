@@ -193,6 +193,17 @@
 - [x] **duplicate detection** — shows "already guessed" message
 - [x] **win state** — disables input, shows celebration, highlights secret at origin
 
+### gameplay + ui tweaks (2025-12-18)
+
+- [x] **subtitle copy refresh** — now: “guess today's word! lower # is better”
+- [x] **removed give up** — no more give-up button or reveal flow; puzzle is strictly “guess until you hit #1”
+- [x] **fatter points + edges** — increased local/outer node sizes and thickened line/trail/marker geometry for better legibility
+- [x] **guess list scrollbar hidden** — list still scrolls but scrollbar is visually removed (webkit + firefox)
+- [x] **responsive layout split**  
+  - desktop: 3d canvas on the left, 320px ui panel on the right  
+  - mobile: ui stacked over a full-screen canvas background
+- [x] **interaction model** — search bar is on top of the z-index stack; clicks/touches anywhere else (including under header/status/list) hit the three.js canvas, so dragging adjusts the view
+
 ### ui/ux
 
 - [x] **brutalist redesign**
