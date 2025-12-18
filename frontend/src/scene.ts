@@ -27,11 +27,16 @@ export class SemanticScene {
   private trailCount = 0;
   
   private animationId: number | null = null;
+  private rotationTime = 0;
+  private isMobile = false;
   
   constructor(container: HTMLElement) {
     // pure black scene
     this.scene = new THREE.Scene();
 
+    // detect mobile
+    this.isMobile = window.matchMedia("(max-width: 768px)").matches;
+    
     // camera
     const aspect = container.clientWidth / container.clientHeight;
     this.camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 100);
@@ -49,6 +54,11 @@ export class SemanticScene {
     this.controls.enableDamping = false;
     this.controls.minDistance = 1;
     this.controls.maxDistance = 10;
+    
+    // disable controls on mobile for auto-rotation
+    if (this.isMobile) {
+      this.controls.enabled = false;
+    }
     
     // no lights needed - using basic materials
     
@@ -153,7 +163,26 @@ export class SemanticScene {
   
   private animate = () => {
     this.animationId = requestAnimationFrame(this.animate);
-    this.controls.update();
+    
+    // slow auto-rotation (especially on mobile)
+    const rotationSpeed = this.isMobile ? 0.0003 : 0.0001;
+    this.rotationTime += rotationSpeed;
+    
+    // gentle gyrating motion: rotate around y-axis with slight vertical oscillation
+    const radius = 3.5;
+    const baseHeight = 2;
+    const verticalOscillation = Math.sin(this.rotationTime * 0.7) * 0.3;
+    
+    this.camera.position.x = Math.cos(this.rotationTime) * radius;
+    this.camera.position.z = Math.sin(this.rotationTime) * radius;
+    this.camera.position.y = baseHeight + verticalOscillation;
+    
+    // look at center with slight tilt
+    this.camera.lookAt(0, Math.sin(this.rotationTime * 0.5) * 0.2, 0);
+    
+    if (!this.isMobile) {
+      this.controls.update();
+    }
     this.renderer.render(this.scene, this.camera);
   };
   
