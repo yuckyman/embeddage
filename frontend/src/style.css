@@ -25,6 +25,8 @@ html, body {
   background: var(--bg);
   color: var(--text);
   overflow: hidden;
+  /* prevent accidental double-tap zoom on mobile */
+  touch-action: manipulation;
 }
 
 #app {
@@ -411,6 +413,10 @@ html, body {
 .guess-panel,
 .collective-panel {
   border-bottom: 1px solid var(--border);
+}
+
+.guess-panel.collapsed {
+  display: none;
 }
 
 .guess-list,

@@ -23,6 +23,7 @@ export class GameUI {
   private input: HTMLInputElement;
   private form: HTMLFormElement;
   private guessList: HTMLElement;
+  private guessPanel: HTMLElement;
   private statusEl: HTMLElement;
   private guessCountEl: HTMLElement;
   private randomBtn: HTMLButtonElement;
@@ -134,6 +135,7 @@ export class GameUI {
 
     this.form = this.container.querySelector(".guess-form")!;
     this.input = this.container.querySelector(".guess-input")!;
+    this.guessPanel = this.container.querySelector(".guess-panel")!;
     this.guessList = this.container.querySelector(".guess-list")!;
     this.statusEl = this.container.querySelector(".status")!;
     this.guessCountEl = this.container.querySelector(".guess-count")!;
@@ -156,6 +158,14 @@ export class GameUI {
     this.leaderboardRefresh = this.container.querySelector(
       ".leaderboard-refresh",
     ) as HTMLButtonElement;
+
+    this.disableDoubleTapZoom([
+      this.randomBtn,
+      this.modeToggleBtn,
+      this.collectiveJoinBtn,
+      this.leaderboardRefresh,
+      this.nameForm,
+    ]);
     
     // form submission
     this.form.addEventListener("submit", (e) => {
@@ -273,6 +283,10 @@ export class GameUI {
     this.mode = mode;
     this.modeSolo.checked = mode === "solo";
     this.modeCollective.checked = mode === "collective";
+
+    this.container.classList.toggle("mode-collective", mode === "collective");
+    this.container.classList.toggle("mode-solo", mode === "solo");
+    this.guessPanel.classList.toggle("collapsed", mode === "collective");
 
     this.modeToggleBtn.textContent = mode === "collective" ? "back to solo" : "with everyone";
     this.collectiveJoinBtn.textContent =
@@ -412,6 +426,23 @@ export class GameUI {
       `;
 
       this.leaderboardEntries.appendChild(row);
+    });
+  }
+
+  private disableDoubleTapZoom(targets: HTMLElement[]) {
+    targets.forEach((target) => {
+      let lastTouch = 0;
+      target.addEventListener(
+        "touchend",
+        (event) => {
+          const now = Date.now();
+          if (now - lastTouch < 350) {
+            event.preventDefault();
+          }
+          lastTouch = now;
+        },
+        { passive: false },
+      );
     });
   }
 }
