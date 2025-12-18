@@ -207,9 +207,9 @@ export class GameUI {
     // color bar
     const colorStyle = `rgb(${guess.color.r}, ${guess.color.g}, ${guess.color.b})`;
     
-    // score used for sorting by semantic similarity (descending)
-    const sortScore = guess.score ?? -1;
-    item.dataset.score = String(sortScore);
+    // rank used for sorting (descending rank so newly worse guesses sink lower)
+    const sortRank = guess.rank ?? -Infinity;
+    item.dataset.rank = String(sortRank);
 
     if (guess.rank !== null) {
       item.innerHTML = `
@@ -226,12 +226,12 @@ export class GameUI {
       `;
     }
     
-    // insert into list sorted by semantic similarity (score desc)
+    // insert into list sorted by rank (desc)
     const children = Array.from(this.guessList.children) as HTMLElement[];
     let inserted = false;
     for (const child of children) {
-      const childScore = parseFloat(child.dataset.score ?? "-1");
-      if (sortScore > childScore) {
+      const childRank = parseFloat(child.dataset.rank ?? "-Infinity");
+      if (sortRank > childRank) {
         this.guessList.insertBefore(item, child);
         inserted = true;
         break;
