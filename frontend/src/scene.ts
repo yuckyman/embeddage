@@ -47,7 +47,10 @@ export class SemanticScene {
     this.renderer.setSize(container.clientWidth, container.clientHeight);
     this.renderer.setPixelRatio(1); // intentionally crisp
     this.renderer.setClearColor(0x000000, 0);
-    container.appendChild(this.renderer.domElement);
+    const canvas = this.renderer.domElement;
+    canvas.style.pointerEvents = "auto";
+    canvas.style.touchAction = "none";
+    container.appendChild(canvas);
     
     // controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
@@ -55,10 +58,8 @@ export class SemanticScene {
     this.controls.minDistance = 1;
     this.controls.maxDistance = 10;
     
-    // disable controls on mobile for auto-rotation
-    if (this.isMobile) {
-      this.controls.enabled = false;
-    }
+    // enable controls for manual manipulation (UI will capture events when needed)
+    this.controls.enabled = true;
     
     // no lights needed - using basic materials
     
@@ -180,9 +181,7 @@ export class SemanticScene {
     // look at center with slight tilt
     this.camera.lookAt(0, Math.sin(this.rotationTime * 0.5) * 0.2, 0);
     
-    if (!this.isMobile) {
-      this.controls.update();
-    }
+    this.controls.update();
     this.renderer.render(this.scene, this.camera);
   };
   
