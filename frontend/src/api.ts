@@ -44,6 +44,10 @@ export async function updateNickname(
     body: JSON.stringify({ nickname }),
   });
 
+  if (res.status === 429) {
+    throw new RateLimitError("rate limit exceeded");
+  }
+
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`nickname update failed: ${res.status} ${text}`);
@@ -52,6 +56,13 @@ export async function updateNickname(
   const data = (await res.json()) as { player_id: string; nickname?: string | null };
   if (data.player_id) persistPlayerId(data.player_id);
   return { playerId: data.player_id, nickname: data.nickname ?? null };
+}
+
+export class RateLimitError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "RateLimitError";
+  }
 }
 
 export async function syncGameState(
@@ -68,6 +79,10 @@ export async function syncGameState(
       finished: payload.finished,
     }),
   });
+
+  if (res.status === 429) {
+    throw new RateLimitError("rate limit exceeded");
+  }
 
   if (!res.ok) {
     const text = await res.text();
@@ -103,6 +118,10 @@ export async function publishCollectiveGuess(
     body: JSON.stringify(payload),
   });
 
+  if (res.status === 429) {
+    throw new RateLimitError("rate limit exceeded");
+  }
+
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`collective publish failed: ${res.status} ${text}`);
@@ -116,6 +135,9 @@ export async function fetchCollectiveGuesses(
   const res = await fetch(
     `${API_BASE}/collective?date=${encodeURIComponent(date)}&limit=${limit}`,
   );
+  if (res.status === 429) {
+    throw new RateLimitError("rate limit exceeded");
+  }
   if (!res.ok) throw new Error(`collective fetch failed: ${res.status}`);
   const data = (await res.json()) as { guesses: CollectiveGuessEntry[] };
   return data.guesses;

@@ -111,18 +111,23 @@ async function handleNickname(request: Request, env: Env): Promise<Response> {
   const nickname = await readNickname(request);
   const nextNickname = nickname ?? undefined;
 
-  const updatedPlayer: PlayerRecord = { ...player, nickname: nextNickname };
-  await env.PLAYERS.put(playerKey(updatedPlayer.playerId), JSON.stringify(updatedPlayer));
+  try {
+    const updatedPlayer: PlayerRecord = { ...player, nickname: nextNickname };
+    await env.PLAYERS.put(playerKey(updatedPlayer.playerId), JSON.stringify(updatedPlayer));
 
-  // keep today's leaderboard entry in sync if it exists
-  const todayKey = leaderboardKey(getTodayNY());
-  const board = await readLeaderboard(env, todayKey);
-  if (board[player.playerId]) {
-    board[player.playerId] = { ...board[player.playerId], nickname: nextNickname };
-    await env.LEADERBOARD.put(todayKey, JSON.stringify(board));
+    // keep today's leaderboard entry in sync if it exists
+    const todayKey = leaderboardKey(getTodayNY());
+    const board = await readLeaderboard(env, todayKey);
+    if (board[player.playerId]) {
+      board[player.playerId] = { ...board[player.playerId], nickname: nextNickname };
+      await env.LEADERBOARD.put(todayKey, JSON.stringify(board));
+    }
+
+    return json({ player_id: updatedPlayer.playerId, nickname: updatedPlayer.nickname ?? null });
+  } catch (err) {
+    // KV rate limit or error - return 429
+    return json({ error: "rate limit exceeded" }, 429);
   }
-
-  return json({ player_id: updatedPlayer.playerId, nickname: updatedPlayer.nickname ?? null });
 }
 
 async function handleGameState(request: Request, env: Env): Promise<Response> {
@@ -140,35 +145,40 @@ async function handleGameState(request: Request, env: Env): Promise<Response> {
     return json({ error: `date mismatch; expected ${today}` }, 400);
   }
 
-  const bestRank = normalizeRank(payload.bestRank);
-  const guessCount = normalizeGuessCount(payload.guessCount);
-  const finished = Boolean(payload.finished) || bestRank === 1;
+  try {
+    const bestRank = normalizeRank(payload.bestRank);
+    const guessCount = normalizeGuessCount(payload.guessCount);
+    const finished = Boolean(payload.finished) || bestRank === 1;
 
-  const boardKey = leaderboardKey(date);
-  const boardMap = await readLeaderboard(env, boardKey);
-  const prev = boardMap[player.playerId];
+    const boardKey = leaderboardKey(date);
+    const boardMap = await readLeaderboard(env, boardKey);
+    const prev = boardMap[player.playerId];
 
-  const nextEntry: ScoreEntry = {
-    playerId: player.playerId,
-    nickname: player.nickname,
-    date,
-    bestRank: updateBestRank(prev?.bestRank ?? null, bestRank),
-    guessCount: updateGuessCount(prev?.guessCount ?? 0, guessCount),
-    finished: prev?.finished || finished,
-    updatedAt: Date.now(),
-  };
+    const nextEntry: ScoreEntry = {
+      playerId: player.playerId,
+      nickname: player.nickname,
+      date,
+      bestRank: updateBestRank(prev?.bestRank ?? null, bestRank),
+      guessCount: updateGuessCount(prev?.guessCount ?? 0, guessCount),
+      finished: prev?.finished || finished,
+      updatedAt: Date.now(),
+    };
 
-  boardMap[player.playerId] = nextEntry;
-  await env.LEADERBOARD.put(boardKey, JSON.stringify(boardMap));
+    boardMap[player.playerId] = nextEntry;
+    await env.LEADERBOARD.put(boardKey, JSON.stringify(boardMap));
 
-  const leaderboard = buildLeaderboard(boardMap, getLimitFromRequest(request));
+    const leaderboard = buildLeaderboard(boardMap, getLimitFromRequest(request));
 
-  return json({
-    player_id: player.playerId,
-    nickname: player.nickname,
-    entry: nextEntry,
-    leaderboard,
-  });
+    return json({
+      player_id: player.playerId,
+      nickname: player.nickname,
+      entry: nextEntry,
+      leaderboard,
+    });
+  } catch (err) {
+    // KV rate limit or error - return 429
+    return json({ error: "rate limit exceeded" }, 429);
+  }
 }
 
 async function handleLeaderboard(request: Request, env: Env): Promise<Response> {
@@ -176,10 +186,14 @@ async function handleLeaderboard(request: Request, env: Env): Promise<Response> 
   const date = url.searchParams.get("date") ?? getTodayNY();
   const limit = getLimitFromRequest(request);
 
-  const boardMap = await readLeaderboard(env, leaderboardKey(date));
-  const leaderboard = buildLeaderboard(boardMap, limit);
-
-  return json({ date, leaderboard });
+  try {
+    const boardMap = await readLeaderboard(env, leaderboardKey(date));
+    const leaderboard = buildLeaderboard(boardMap, limit);
+    return json({ date, leaderboard });
+  } catch (err) {
+    // KV rate limit or error - return 429
+    return json({ error: "rate limit exceeded" }, 429);
+  }
 }
 
 async function handleCollectiveGuess(request: Request, env: Env): Promise<Response> {
@@ -196,37 +210,47 @@ async function handleCollectiveGuess(request: Request, env: Env): Promise<Respon
   const word = normalizeWord(payload.word);
   if (!word) return json({ error: "missing word" }, 400);
 
-  const bestRank = normalizeRank(payload.rank);
-  const bestScore = normalizeScore(payload.score);
+  try {
+    const bestRank = normalizeRank(payload.rank);
+    const bestScore = normalizeScore(payload.score);
 
-  const key = collectiveKey(date);
-  const crowdMap = await readCollective(env, key);
-  const prev = crowdMap[word];
-  const now = Date.now();
+    const key = collectiveKey(date);
+    const crowdMap = await readCollective(env, key);
+    const prev = crowdMap[word];
+    const now = Date.now();
 
-  const entry: CollectiveEntry = {
-    word,
-    normalized: word,
-    bestRank: updateBestRank(prev?.bestRank ?? null, bestRank),
-    bestScore: updateBestScore(prev?.bestScore ?? null, bestScore),
-    count: (prev?.count ?? 0) + 1,
-    lastSeenAt: now,
-  };
+    const entry: CollectiveEntry = {
+      word,
+      normalized: word,
+      bestRank: updateBestRank(prev?.bestRank ?? null, bestRank),
+      bestScore: updateBestScore(prev?.bestScore ?? null, bestScore),
+      count: (prev?.count ?? 0) + 1,
+      lastSeenAt: now,
+    };
 
-  crowdMap[word] = entry;
-  await env.LEADERBOARD.put(key, JSON.stringify(crowdMap));
+    crowdMap[word] = entry;
+    await env.LEADERBOARD.put(key, JSON.stringify(crowdMap));
 
-  const guesses = buildCollectiveList(crowdMap, getLimitFromRequest(request));
-  return json({ guesses });
+    const guesses = buildCollectiveList(crowdMap, getLimitFromRequest(request));
+    return json({ guesses });
+  } catch (err) {
+    // KV rate limit or error - return 429
+    return json({ error: "rate limit exceeded" }, 429);
+  }
 }
 
 async function handleCollective(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const date = url.searchParams.get("date") ?? getTodayNY();
-  const key = collectiveKey(date);
-  const crowdMap = await readCollective(env, key);
-  const guesses = buildCollectiveList(crowdMap, getLimitFromRequest(request));
-  return json({ guesses });
+  try {
+    const key = collectiveKey(date);
+    const crowdMap = await readCollective(env, key);
+    const guesses = buildCollectiveList(crowdMap, getLimitFromRequest(request));
+    return json({ guesses });
+  } catch (err) {
+    // KV rate limit or error - return 429
+    return json({ error: "rate limit exceeded" }, 429);
+  }
 }
 
 async function handleAdminClear(request: Request, env: Env): Promise<Response> {
@@ -377,24 +401,35 @@ function collectiveKey(date: string): string {
   return `collective:${date}`;
 }
 async function readLeaderboard(env: Env, key: string): Promise<LeaderboardMap> {
-  const stored = await env.LEADERBOARD.get(key);
-  if (!stored) return {};
   try {
-    return JSON.parse(stored) as LeaderboardMap;
-  } catch {
-    return {};
+    const stored = await env.LEADERBOARD.get(key);
+    if (!stored) return {};
+    try {
+      return JSON.parse(stored) as LeaderboardMap;
+    } catch {
+      return {};
+    }
+  } catch (err) {
+    // KV rate limit or other error - throw to be caught by handler
+    throw err;
   }
 }
 
 async function readCollective(env: Env, key: string): Promise<CollectiveMap> {
-  const stored = await env.LEADERBOARD.get(key);
-  if (!stored) return {};
   try {
-    return JSON.parse(stored) as CollectiveMap;
-  } catch {
-    return {};
+    const stored = await env.LEADERBOARD.get(key);
+    if (!stored) return {};
+    try {
+      return JSON.parse(stored) as CollectiveMap;
+    } catch {
+      return {};
+    }
+  } catch (err) {
+    // KV rate limit or other error - throw to be caught by handler
+    throw err;
   }
 }
+
 function buildLeaderboard(map: LeaderboardMap, limit: number): ScoreEntry[] {
   const entries = Object.values(map);
   entries.sort((a, b) => {

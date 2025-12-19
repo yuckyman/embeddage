@@ -324,6 +324,24 @@ export class GameUI {
   }
 
   /**
+   * show rate limit game over screen
+   */
+  showRateLimitGameOver(secretWord: string) {
+    this.won = true;
+    this.input.disabled = true;
+    
+    this.statusEl.innerHTML = `
+      <div class="win-message">
+        <div style="color: var(--accent); margin-bottom: 0.5rem;">⚠️ rate limit reached</div>
+        <div>the word was <strong>${escapeHtml(secretWord)}</strong></div>
+        <br>
+        <span class="win-stats">game over — kv requests exceeded daily limit</span>
+      </div>
+    `;
+    this.statusEl.classList.add("win");
+  }
+
+  /**
    * show loading state
    */
   showLoading(message = "loading...") {

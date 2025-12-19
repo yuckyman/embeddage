@@ -16,6 +16,7 @@ import {
   fetchCollectiveGuesses,
   fetchLeaderboard,
   publishCollectiveGuess,
+  RateLimitError,
   syncGameState,
   updateNickname,
 } from "./api.ts";
@@ -34,8 +35,8 @@ async function main() {
   // split into two panels: 3d view and game UI
   appEl.innerHTML = `
     <div class="layout">
-      <div class="scene-container"></div>
       <div class="ui-container"></div>
+      <div class="scene-container"></div>
     </div>
   `;
   
@@ -84,6 +85,23 @@ async function main() {
     }
   };
 
+  const handleRateLimit = () => {
+    const secretWord = artifacts?.meta.secret_word;
+    if (secretWord) {
+      ui.showRateLimitGameOver(secretWord);
+      // also highlight the secret word in the scene if we have it
+      if (artifacts && wordToId) {
+        const secretId = artifacts.meta.secret_id;
+        if (secretId !== undefined) {
+          const secretGuess = processGuess(secretWord, artifacts, wordToId);
+          scene.highlightWin(secretGuess);
+        }
+      }
+    } else {
+      ui.showError("rate limit reached — game over");
+    }
+  };
+
   const pushGameState = async () => {
     if (!playerId) {
       await ensureIdentity();
@@ -103,6 +121,10 @@ async function main() {
       }
       ui.setLeaderboard(res.leaderboard, playerId);
     } catch (err) {
+      if (err instanceof RateLimitError) {
+        handleRateLimit();
+        return;
+      }
       console.warn("failed to sync game state", err);
     }
   };
@@ -209,6 +231,11 @@ async function main() {
         collectiveRendered.add(normalized);
       });
     } catch (err) {
+      if (err instanceof RateLimitError) {
+        handleRateLimit();
+        stopCollectiveLoop();
+        return;
+      }
       console.warn("failed to refresh collective guesses", err);
     } finally {
       stopCollectiveLoop();
@@ -234,6 +261,10 @@ async function main() {
       const leaderboard = await fetchLeaderboard(date, 25);
       ui.setLeaderboard(leaderboard, playerId ?? undefined);
     } catch (err) {
+      if (err instanceof RateLimitError) {
+        handleRateLimit();
+        return;
+      }
       console.warn("failed to load leaderboard", err);
       ui.showLeaderboardError("leaderboard unavailable");
     }
@@ -260,6 +291,10 @@ async function main() {
       ui.showNameStatus(profile.nickname ? "saved" : "cleared to anon");
       void refreshLeaderboard();
     } catch (err) {
+      if (err instanceof RateLimitError) {
+        handleRateLimit();
+        return;
+      }
       console.warn("failed to save nickname", err);
       ui.showNameStatus("couldn't save name", true);
     }
@@ -282,6 +317,10 @@ async function main() {
         score: guess.score,
       });
     } catch (err) {
+      if (err instanceof RateLimitError) {
+        handleRateLimit();
+        return;
+      }
       console.warn("failed to publish collective guess", err);
     }
   };
