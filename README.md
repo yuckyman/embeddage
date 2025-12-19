@@ -1,6 +1,6 @@
 # embeddage
 
-a word-guessing game with 3d visualization. guess the secret word — each guess shows how semantically close you are based on GloVe embeddings.
+a word-guessing game with 3d visualization. guess the secret word — each guess shows how semantically close you are based on GloVe embeddings. visit [here](https://embeddage.spillyourguts.online)
 
 ## quick start
 
