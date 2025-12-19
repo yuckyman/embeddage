@@ -68,6 +68,17 @@ def main():
         help="optional path to newline-separated obscene/slur words to filter out "
              "(default: data/obscene_words.txt if present)"
     )
+    parser.add_argument(
+        "--no-lemmatize",
+        action="store_true",
+        help="skip lemmatization (default: lemmatize vocabulary)"
+    )
+    parser.add_argument(
+        "--lemma-output",
+        type=Path,
+        default=None,
+        help="path for lemma mapping JSON (default: {output-dir}/lemmas.json)"
+    )
 
     args = parser.parse_args()
 
@@ -91,6 +102,8 @@ def main():
         filter_vocab=not args.no_filter,
         english_dict_path=args.english_dict,
         obscene_words_path=obscene_list_path,
+        lemmatize=not args.no_lemmatize,
+        lemma_output_path=args.lemma_output,
     )
 
     print("\npreprocessing complete!")

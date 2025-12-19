@@ -39,6 +39,48 @@ export async function fetchWords(): Promise<string[]> {
 }
 
 /**
+ * fetch lemma mapping (cached after first load)
+ */
+let cachedLemmas: {
+  wordToLemma: Map<string, string>;
+  lemmaToWords: Map<string, string[]>;
+} | null = null;
+
+export async function fetchLemmas(): Promise<{
+  wordToLemma: Map<string, string>;
+  lemmaToWords: Map<string, string[]>;
+} | null> {
+  if (cachedLemmas) return cachedLemmas;
+  
+  try {
+    const res = await fetch("./lemmas.json");
+    if (!res.ok) return null; // lemmas.json is optional
+    
+    const data = await res.json() as {
+      word_to_lemma: Record<string, string>;
+      lemma_to_words: Record<string, string[]>;
+    };
+    
+    // convert to Maps for efficient lookup
+    const wordToLemma = new Map<string, string>();
+    const lemmaToWords = new Map<string, string[]>();
+    
+    for (const [word, lemma] of Object.entries(data.word_to_lemma)) {
+      wordToLemma.set(word, lemma);
+    }
+    
+    for (const [lemma, words] of Object.entries(data.lemma_to_words)) {
+      lemmaToWords.set(lemma, words);
+    }
+    
+    cachedLemmas = { wordToLemma, lemmaToWords };
+    return cachedLemmas;
+  } catch {
+    return null; // lemmas.json not available
+  }
+}
+
+/**
  * build word → id lookup map
  */
 export function buildWordToId(words: string[]): Map<string, number> {
@@ -91,6 +133,9 @@ export async function fetchArtifacts(date: string): Promise<Artifacts> {
   const localIndexById = new Map<number, number>();
   localIds.forEach((id, i) => localIndexById.set(id, i));
   
+  // load lemma mapping (optional)
+  const lemmas = await fetchLemmas();
+  
   return {
     meta,
     words,
@@ -98,6 +143,7 @@ export async function fetchArtifacts(date: string): Promise<Artifacts> {
     localIds,
     localIndexById,
     xyz,
+    lemmas: lemmas || undefined,
   };
 }
 

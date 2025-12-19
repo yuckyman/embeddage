@@ -105,6 +105,43 @@ export function outsiderPosition(
 }
 
 /**
+ * find word ID using lemmatization fallback
+ * 
+ * tries exact match first, then lemmatized match if available
+ */
+function findWordId(
+  normalized: string,
+  wordToId: Map<string, number>,
+  lemmas?: {
+    wordToLemma: Map<string, string>;
+    lemmaToWords: Map<string, string[]>;
+  }
+): number | null {
+  // try exact match first
+  const exactId = wordToId.get(normalized);
+  if (exactId !== undefined) return exactId;
+  
+  // try lemmatization fallback
+  if (lemmas) {
+    // get lemma for the input word
+    const lemma = lemmas.wordToLemma.get(normalized);
+    if (lemma) {
+      // find all words with this lemma
+      const wordsWithLemma = lemmas.lemmaToWords.get(lemma);
+      if (wordsWithLemma) {
+        // try to find the first word that exists in vocabulary
+        for (const word of wordsWithLemma) {
+          const id = wordToId.get(word);
+          if (id !== undefined) return id;
+        }
+      }
+    }
+  }
+  
+  return null;
+}
+
+/**
  * process a user guess and return full Guess object
  */
 export function processGuess(
@@ -113,7 +150,7 @@ export function processGuess(
   wordToId: Map<string, number>
 ): Guess {
   const normalized = normalizeGuess(input);
-  const id = wordToId.get(normalized) ?? null;
+  const id = findWordId(normalized, wordToId, artifacts.lemmas);
   
   // out of vocabulary
   if (id === null) {

@@ -72,8 +72,8 @@ def main():
     parser.add_argument(
         "-k",
         type=int,
-        default=256,
-        help="number of neighbors in local cluster (default: 256)"
+        default=512,
+        help="number of neighbors in local cluster (default: 512)"
     )
     parser.add_argument(
         "--verbose", "-v",

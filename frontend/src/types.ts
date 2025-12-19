@@ -21,6 +21,10 @@ export type Artifacts = {
   localIds: number[];
   localIndexById: Map<number, number>;
   xyz: Float32Array; // flat [x0,y0,z0,x1,y1,z1,...]
+  lemmas?: {
+    wordToLemma: Map<string, string>;
+    lemmaToWords: Map<string, string[]>;
+  };
 };
 
 export type GuessKind = "local" | "outer";

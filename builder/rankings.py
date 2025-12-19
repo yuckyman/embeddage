@@ -31,7 +31,7 @@ class RankingResult:
 def compute_rankings(
     embeddings: NDArray[np.float32],
     secret_id: int,
-    k: int = 256
+    k: int = 512
 ) -> RankingResult:
     """
     compute full rankings and top-k neighborhood.

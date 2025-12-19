@@ -41,8 +41,20 @@ def main():
     print(f"copying {src} → {dst}...")
     shutil.copy(src, dst)
     
+    # copy lemma mapping if it exists
+    lemma_src = DEFAULT_CONFIG.data_dir / "lemmas.json"
+    lemma_dst = docs_dir / "lemmas.json"
+    
+    if lemma_src.exists():
+        print(f"copying {lemma_src} → {lemma_dst}...")
+        shutil.copy(lemma_src, lemma_dst)
+    else:
+        print(f"note: {lemma_src} not found (lemmatization skipped or not available)")
+    
     print("\ndocs/ setup complete!")
     print(f"  {dst} ({dst.stat().st_size:,} bytes)")
+    if lemma_src.exists():
+        print(f"  {lemma_dst} ({lemma_dst.stat().st_size:,} bytes)")
 
 
 if __name__ == "__main__":

@@ -18,8 +18,10 @@
 **extras we added:**
 - [x] `builder/filters.py` — vocab filtering (stopwords, non-ascii, repeated chars, internet junk)
 - [x] `builder/wordfreq_utils.py` — zipf frequency scoring via `wordfreq` library
-- [x] `scripts/setup_docs.py` — copies vocab to docs/
+- [x] `builder/lemmatization.py` — spaCy-based lemmatization utilities
+- [x] `scripts/setup_docs.py` — copies vocab + lemmas to docs/
 - [x] `scripts/build_secret_candidates.py` — builds nice secret word pool
+- [x] `scripts/lemmatize_vocab.py` — standalone script to lemmatize entire vocabulary
 
 ### 1.2 preprocess GloVe → `words.json` + `embeddings_normed.npy` ✅
 
@@ -112,7 +114,8 @@
 
 - [x] `getTodayNY()` via `Intl.DateTimeFormat`
 - [x] `fetchWords()` → caches vocab
-- [x] `fetchArtifacts(date)` → meta, rank, localIds, xyz
+- [x] `fetchLemmas()` → loads lemma mappings (optional)
+- [x] `fetchArtifacts(date)` → meta, rank, localIds, xyz, lemmas
 - [x] build `Uint32Array` / `Float32Array`
 - [x] sanity checks on lengths
 - [x] `localIndexById` map for fast lookup
@@ -120,6 +123,7 @@
 ### 3.2 guess normalization + rank/percentile/color ✅
 
 - [x] `normalizeGuess()` — lowercase, trim, strip punctuation
+- [x] `findWordId()` — exact match first, then lemmatization fallback
 - [x] `rankToPercentile()` — `1 - (r-1)/(V-1)`
 - [x] `shapeScore()` — sigmoid (a=12, b=0.5)
 - [x] `scoreToColor()` — gray (#333) → orange (#ff6600)
@@ -226,6 +230,7 @@ embeddage/
 │   ├── config.py          # embed_dim=100, k=256, etc.
 │   ├── embeddings.py      # preprocess_glove(), load_*()
 │   ├── filters.py         # stopwords, ascii filter, etc.
+│   ├── lemmatization.py   # spaCy lemmatization utilities
 │   ├── word_of_day.py     # secret_for_date(), hash_secret()
 │   ├── rankings.py        # compute_rankings()
 │   ├── projection.py      # project_to_3d()
@@ -235,7 +240,8 @@ embeddage/
 │   ├── preprocess_glove.py
 │   ├── build_day.py
 │   ├── setup_docs.py
-│   └── build_secret_candidates.py
+│   ├── build_secret_candidates.py
+│   └── lemmatize_vocab.py
 ├── frontend/
 │   ├── src/
 │   │   ├── types.ts       # Meta, Artifacts, Guess, etc.
@@ -254,11 +260,13 @@ embeddage/
 │   │   └── words_dictionary.json
 │   ├── words.json         # filtered vocab
 │   ├── embeddings_normed.npy
+│   ├── lemmas.json        # word->lemma + lemma->words mappings
 │   └── secret_candidates.json
 ├── docs/
 │   ├── index.html
 │   ├── assets/
 │   ├── words.json
+│   ├── lemmas.json        # copied from data/lemmas.json
 │   └── data/
 │       └── YYYY-MM-DD.{meta,rank,local_ids,local_xyz}.*
 ├── requirements.txt
@@ -268,9 +276,31 @@ embeddage/
 
 ---
 
+## lemmatization (2025-12-18) ✅
+
+- [x] **spaCy integration** — added `builder/lemmatization.py` with batch processing support
+- [x] **vocabulary lemmatization** — `scripts/lemmatize_vocab.py` processes all 151k words
+- [x] **lemma mapping generation** — creates `word_to_lemma` and `lemma_to_words` mappings
+- [x] **frontend integration** — `findWordId()` uses lemmatization fallback for word matching
+- [x] **default behavior** — lemmatization is enabled by default in preprocessing pipeline
+
+**results:**
+- 151,002 words → 112,725 unique lemmas (1.34x compression)
+- examples: "running"/"runs" → "run", "better"/"best" → "good", "mice" → "mouse"
+- user guesses like "running" now match "run" in vocabulary automatically
+
+**implementation:**
+- uses spaCy `en_core_web_sm` model with parser/NER disabled for speed
+- batch processing (1000 words at a time) for efficiency
+- lemma mapping saved to `data/lemmas.json` and copied to `docs/lemmas.json`
+- frontend loads lemma mappings and uses them as fallback when exact match fails
+
+**decision:** lemmatization is now the default behavior. users can type inflected forms (running, better, mice) and they'll automatically match their base forms (run, good, mouse) in the vocabulary.
+
+---
+
 ## todo / future ideas
 
-- [ ] lemmatization (friend/friends/friendly → same base)
 - [ ] CI: auto-generate next 7 days of artifacts
 - [ ] github pages + custom domain
 - [ ] share results (copy to clipboard)

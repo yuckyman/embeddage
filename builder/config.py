@@ -16,7 +16,7 @@ class Config:
     embed_dim: int = 100
     
     # number of nearest neighbors to include in local cluster
-    k: int = 256
+    k: int = 512
     
     # timezone for day boundaries
     day_boundary_tz: str = "America/New_York"
