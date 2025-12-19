@@ -12,9 +12,14 @@ download `glove.twitter.27B.zip` from [Stanford NLP](https://nlp.stanford.edu/pr
 # install deps
 pip install -r requirements.txt
 
+# optional: install spaCy for lemmatization (only needed for preprocessing)
+# pip install spacy && python -m spacy download en_core_web_sm
+
 # preprocess (creates data/words.json + data/embeddings_normed.npy)
 python scripts/preprocess_glove.py path/to/glove.twitter.27B.50d.txt
 ```
+
+**note:** spaCy is optional and only needed for preprocessing (generating `lemmas.json`). The server/frontend use pre-generated `lemmas.json` and don't require spaCy at runtime. If spaCy isn't installed, preprocessing will skip lemmatization.
 
 ### 2. build daily artifacts
 

@@ -2,11 +2,18 @@
 lemmatization utilities for vocabulary processing.
 
 uses spaCy for fast, accurate lemmatization with batch processing support.
+spaCy is optional - only needed for preprocessing (generating lemmas.json).
+The server/frontend use pre-generated lemmas.json and don't require spaCy.
 """
 
 from typing import Dict, List, Optional
-import spacy
-from spacy.lang.en import English
+
+try:
+    import spacy
+    from spacy.lang.en import English
+    SPACY_AVAILABLE = True
+except ImportError:
+    SPACY_AVAILABLE = False
 
 
 class Lemmatizer:
@@ -20,6 +27,12 @@ class Lemmatizer:
             model_name: spaCy model to use (default: en_core_web_sm)
             disable: pipeline components to disable for speed (default: ["parser", "ner"])
         """
+        if not SPACY_AVAILABLE:
+            raise RuntimeError(
+                "spaCy is not installed. "
+                "Install it with: pip install spacy && python -m spacy download en_core_web_sm"
+            )
+        
         if disable is None:
             disable = ["parser", "ner"]  # only need tokenizer + tagger + lemmatizer
         
@@ -118,7 +131,17 @@ def create_lemma_mapping(
     
     returns:
         dict mapping word -> lemma
+    
+    note:
+        requires spaCy to be installed. spaCy is optional for runtime/server,
+        only needed for preprocessing (generating lemmas.json).
     """
+    if not SPACY_AVAILABLE:
+        raise RuntimeError(
+            "spaCy is not installed. "
+            "Install it with: pip install spacy && python -m spacy download en_core_web_sm"
+        )
+    
     if verbose:
         print(f"initializing lemmatizer (model: {model_name})...")
     

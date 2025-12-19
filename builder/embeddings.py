@@ -171,34 +171,45 @@ def preprocess_glove(
 
     # lemmatization: create word -> lemma mapping and lemma -> words mapping
     if lemmatize:
-        from .lemmatization import create_lemma_mapping, Lemmatizer
+        try:
+            from .lemmatization import create_lemma_mapping, Lemmatizer
+        except ImportError:
+            print("warning: spaCy not available, skipping lemmatization")
+            print("  install spaCy with: pip install spacy && python -m spacy download en_core_web_sm")
+            print("  or run preprocessing with lemmatize=False")
+            lemmatize = False
         
-        if lemma_output_path is None:
-            lemma_output_path = output_vocab_path.parent / "lemmas.json"
-        
-        print(f"creating lemma mapping...")
-        lemma_map = create_lemma_mapping(words, verbose=True)
-        
-        # also create reverse mapping: lemma -> list of words
-        lemma_to_words: Dict[str, List[str]] = {}
-        for word, lemma in lemma_map.items():
-            if lemma not in lemma_to_words:
-                lemma_to_words[lemma] = []
-            lemma_to_words[lemma].append(word)
-        
-        # save both mappings
-        lemma_data = {
-            "word_to_lemma": lemma_map,
-            "lemma_to_words": lemma_to_words
-        }
-        
-        print(f"saving lemma mapping to {lemma_output_path}...")
-        lemma_output_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(lemma_output_path, "w", encoding="utf-8") as f:
-            json.dump(lemma_data, f, indent=2)
-        
-        print(f"  saved {len(lemma_map):,} word->lemma mappings")
-        print(f"  {len(lemma_to_words):,} unique lemmas")
+        if lemmatize:
+            if lemma_output_path is None:
+                lemma_output_path = output_vocab_path.parent / "lemmas.json"
+            
+            print(f"creating lemma mapping...")
+            try:
+                lemma_map = create_lemma_mapping(words, verbose=True)
+                
+                # also create reverse mapping: lemma -> list of words
+                lemma_to_words: Dict[str, List[str]] = {}
+                for word, lemma in lemma_map.items():
+                    if lemma not in lemma_to_words:
+                        lemma_to_words[lemma] = []
+                    lemma_to_words[lemma].append(word)
+                
+                # save both mappings
+                lemma_data = {
+                    "word_to_lemma": lemma_map,
+                    "lemma_to_words": lemma_to_words
+                }
+                
+                print(f"saving lemma mapping to {lemma_output_path}...")
+                lemma_output_path.parent.mkdir(parents=True, exist_ok=True)
+                with open(lemma_output_path, "w", encoding="utf-8") as f:
+                    json.dump(lemma_data, f, indent=2)
+                
+                print(f"  saved {len(lemma_map):,} word->lemma mappings")
+                print(f"  {len(lemma_to_words):,} unique lemmas")
+            except RuntimeError as e:
+                print(f"error during lemmatization: {e}")
+                print("  skipping lemmatization (lemmas.json will not be created)")
 
     print(f"done! vocab size: {V:,}")
     return V
