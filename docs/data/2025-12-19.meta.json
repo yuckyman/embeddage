@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-19",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2014625232,
+  "secret_hash": "95da79a6068265c9298d0ad81fcb6756be92b56af1eebfcd06115c6ca17f042b",
+  "secret_id": 9411,
+  "secret_word": "recalling"
+}
