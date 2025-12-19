@@ -27,8 +27,15 @@ export class SemanticScene {
   private trailCount = 0;
   
   private animationId: number | null = null;
-  private rotationTime = 0;
   private isMobile = false;
+  private isUserInteracting = false;
+  private idleTimeout: number | null = null;
+  
+  // auto-rotation state (derived from camera position when resuming)
+  private autoRotateAngle = 0;
+  private autoRotateRadius = 3.5;
+  private autoRotateHeight = 2;
+  private autoRotateVerticalPhase = 0;
   
   constructor(container: HTMLElement) {
     // pure black scene
@@ -42,6 +49,13 @@ export class SemanticScene {
     this.camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 100);
     this.camera.position.set(2.5, 2, 2.5);
     
+    // init auto-rotate state from starting camera position
+    this.autoRotateAngle = Math.atan2(this.camera.position.z, this.camera.position.x);
+    this.autoRotateRadius = Math.sqrt(
+      this.camera.position.x ** 2 + this.camera.position.z ** 2
+    );
+    this.autoRotateHeight = this.camera.position.y;
+    
     // renderer - no antialiasing for sharper look, transparent to let UI show through
     this.renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
     this.renderer.setSize(container.clientWidth, container.clientHeight);
@@ -54,12 +68,35 @@ export class SemanticScene {
     
     // controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.enableDamping = false;
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.05;
     this.controls.minDistance = 1;
     this.controls.maxDistance = 10;
     
     // enable controls for manual manipulation (UI will capture events when needed)
     this.controls.enabled = true;
+    
+    // track user interaction to pause auto-rotation
+    this.controls.addEventListener("start", () => {
+      this.isUserInteracting = true;
+      if (this.idleTimeout) {
+        window.clearTimeout(this.idleTimeout);
+        this.idleTimeout = null;
+      }
+    });
+    this.controls.addEventListener("end", () => {
+      // resume auto-rotation after 3 seconds of idle
+      this.idleTimeout = window.setTimeout(() => {
+        // capture current camera state to resume smoothly from here
+        const { x, y, z } = this.camera.position;
+        this.autoRotateAngle = Math.atan2(z, x);
+        this.autoRotateRadius = Math.sqrt(x * x + z * z);
+        this.autoRotateHeight = y;
+        // estimate vertical phase from current height offset
+        this.autoRotateVerticalPhase = 0;
+        this.isUserInteracting = false;
+      }, 3000);
+    });
     
     // no lights needed - using basic materials
     
@@ -165,21 +202,24 @@ export class SemanticScene {
   private animate = () => {
     this.animationId = requestAnimationFrame(this.animate);
     
-    // slow auto-rotation (especially on mobile)
-    const rotationSpeed = this.isMobile ? 0.0003 : 0.0001;
-    this.rotationTime += rotationSpeed;
-    
-    // gentle gyrating motion: rotate around y-axis with slight vertical oscillation
-    const radius = 3.5;
-    const baseHeight = 2;
-    const verticalOscillation = Math.sin(this.rotationTime * 0.7) * 0.3;
-    
-    this.camera.position.x = Math.cos(this.rotationTime) * radius;
-    this.camera.position.z = Math.sin(this.rotationTime) * radius;
-    this.camera.position.y = baseHeight + verticalOscillation;
-    
-    // look at center with slight tilt
-    this.camera.lookAt(0, Math.sin(this.rotationTime * 0.5) * 0.2, 0);
+    // only auto-rotate when user isn't interacting
+    if (!this.isUserInteracting) {
+      // slow auto-rotation
+      const rotationSpeed = this.isMobile ? 0.0003 : 0.0001;
+      this.autoRotateAngle += rotationSpeed;
+      this.autoRotateVerticalPhase += rotationSpeed * 0.7;
+      
+      // gentle vertical oscillation (small amplitude so it doesn't jump)
+      const verticalOscillation = Math.sin(this.autoRotateVerticalPhase) * 0.3;
+      
+      // rotate from where user left off
+      this.camera.position.x = Math.cos(this.autoRotateAngle) * this.autoRotateRadius;
+      this.camera.position.z = Math.sin(this.autoRotateAngle) * this.autoRotateRadius;
+      this.camera.position.y = this.autoRotateHeight + verticalOscillation;
+      
+      // look at the controls target (could be origin or win marker)
+      this.camera.lookAt(this.controls.target);
+    }
     
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
@@ -253,7 +293,11 @@ export class SemanticScene {
     if (this.animationId !== null) {
       cancelAnimationFrame(this.animationId);
     }
+    if (this.idleTimeout !== null) {
+      window.clearTimeout(this.idleTimeout);
+    }
     window.removeEventListener("resize", this.onResize);
+    this.controls.dispose();
     this.renderer.dispose();
   }
 }
