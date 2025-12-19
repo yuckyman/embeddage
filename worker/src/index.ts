@@ -6,6 +6,7 @@ interface Env {
   LEADERBOARD: KVNamespace;
   PLAYERS: KVNamespace;
   ASSETS: Fetcher;
+  ADMIN_TOKEN?: string;
 }
 
 const CORS_HEADERS = {
@@ -45,6 +46,10 @@ export default {
 
     if (pathname.startsWith("/api/collective") && request.method === "GET") {
       return handleCollective(request, env);
+    }
+
+    if (pathname.startsWith("/api/admin/clear") && request.method === "POST") {
+      return handleAdminClear(request, env);
     }
     // fall through to static assets
     return env.ASSETS.fetch(request);
@@ -222,6 +227,55 @@ async function handleCollective(request: Request, env: Env): Promise<Response> {
   const crowdMap = await readCollective(env, key);
   const guesses = buildCollectiveList(crowdMap, getLimitFromRequest(request));
   return json({ guesses });
+}
+
+async function handleAdminClear(request: Request, env: Env): Promise<Response> {
+  // check admin token
+  const authError = checkAdminAuth(request, env);
+  if (authError) return authError;
+
+  const url = new URL(request.url);
+  const date = url.searchParams.get("date") ?? getTodayNY();
+
+  // validate date format (YYYY-MM-DD)
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return json({ error: "invalid date format; expected YYYY-MM-DD" }, 400);
+  }
+
+  // clear leaderboard for this date
+  const lbKey = leaderboardKey(date);
+  await env.LEADERBOARD.delete(lbKey);
+
+  // clear collective guesses for this date
+  const collKey = collectiveKey(date);
+  await env.LEADERBOARD.delete(collKey);
+
+  return json({
+    success: true,
+    date,
+    cleared: {
+      leaderboard: true,
+      collective: true,
+    },
+  });
+}
+
+function checkAdminAuth(request: Request, env: Env): Response | null {
+  const adminToken = env.ADMIN_TOKEN;
+  if (!adminToken) {
+    return json({ error: "admin functionality not configured" }, 503);
+  }
+
+  const header = request.headers.get("Authorization");
+  const token = header?.toLowerCase().startsWith("bearer ")
+    ? header.slice(7).trim()
+    : null;
+
+  if (!token || token !== adminToken) {
+    return json({ error: "unauthorized" }, 401);
+  }
+
+  return null;
 }
 
 async function authenticate(
