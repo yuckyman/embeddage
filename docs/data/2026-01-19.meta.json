@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-19",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 221363751,
+  "secret_hash": "43d4a0d11617066e0fa8470534885c6bd78b265c8bd6bd3d820296925740a2d0",
+  "secret_id": 776,
+  "secret_word": "elected"
+}

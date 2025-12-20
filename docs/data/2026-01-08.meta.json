@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-08",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 847698287,
+  "secret_hash": "91db541b1a0ed8b9c683c122baf0c9222bccf09844b85208f98434c1bfbe68de",
+  "secret_id": 23623,
+  "secret_word": "sprinting"
+}

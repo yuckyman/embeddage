@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-26",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3535445218,
+  "secret_hash": "c680928af8516d13beea4afaf9fe40904c1e46e4a282ce0b696a144bef19acc9",
+  "secret_id": 26216,
+  "secret_word": "cleanse"
+}

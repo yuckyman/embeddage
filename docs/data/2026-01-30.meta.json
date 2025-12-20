@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-30",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 789669977,
+  "secret_hash": "3ba2ba51abd2c88260d01130febb5b5ea6275877b8f6d0b1a4b731ca2b09251e",
+  "secret_id": 16632,
+  "secret_word": "estuary"
+}

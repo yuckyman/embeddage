@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-12",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4022160333,
+  "secret_hash": "2eb6f4b03bb208e5227deab34bf009184bc9f2cc373187b8230944364401491f",
+  "secret_id": 4887,
+  "secret_word": "convince"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-03",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1828915335,
+  "secret_hash": "164e8942935301b14a5728e2a4d117d3cfaefe051ba2ca37b652f55884be7b76",
+  "secret_id": 832,
+  "secret_word": "calls"
+}

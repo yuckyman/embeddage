@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-22",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2414954628,
+  "secret_hash": "ba9a1a8cc67ab56e29ff3ebff8d990d9420b5b3a91f374fa07d55908f37ed451",
+  "secret_id": 11491,
+  "secret_word": "disciplines"
+}

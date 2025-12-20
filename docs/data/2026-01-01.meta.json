@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-01",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4155808180,
+  "secret_hash": "968cb19263fbc825ae13ed7f62fd56c299d4266d39cc0ea494ce4a981a60e9a2",
+  "secret_id": 10822,
+  "secret_word": "soda"
+}

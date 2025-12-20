@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-13",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2105988423,
+  "secret_hash": "41cd1a0f8a42fbe4e5dd6ec7d4b161e9984c661e270db7f21cb4f6caad654535",
+  "secret_id": 6632,
+  "secret_word": "architects"
+}

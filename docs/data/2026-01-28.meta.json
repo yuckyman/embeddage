@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-28",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1513692838,
+  "secret_hash": "cc6a7fad4431da1452d3eac33e6458cac74bf0762094a0b5d45ada6d4b2ed2b7",
+  "secret_id": 18678,
+  "secret_word": "encore"
+}

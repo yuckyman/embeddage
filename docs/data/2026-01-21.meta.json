@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-21",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2042019202,
+  "secret_hash": "7e705a9506183d17779aa911ef647f7a131bbb880ff45cf6563c64e0a151c22b",
+  "secret_id": 2196,
+  "secret_word": "resistance"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-06",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1067575274,
+  "secret_hash": "ba408e9210f362012f17e83d28f08f79264866298b618715d98368ce7c432400",
+  "secret_id": 9000,
+  "secret_word": "wesley"
+}

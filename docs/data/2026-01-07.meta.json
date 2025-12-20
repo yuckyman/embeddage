@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-07",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3563138532,
+  "secret_hash": "40be5bda0add957235473f80998b38ebce85cbde589945d68e9d0075b270b205",
+  "secret_id": 10178,
+  "secret_word": "doomed"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-04",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 229992407,
+  "secret_hash": "5a898747ba605094d994f9ed180e524429774c5376a2fa9240a043ec9ae775b0",
+  "secret_id": 7068,
+  "secret_word": "sterling"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-18",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 399243819,
+  "secret_hash": "708606e1a7e29db4119bfba5d6554121cf08fa96ed5062ff82e3307e7952350a",
+  "secret_id": 6147,
+  "secret_word": "rhythm"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-01-16",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 479717548,
+  "secret_hash": "1db5d248720c249e6caa372f4a1ca7e1571ac17d7abc74eab6524ad0dabd4ced",
+  "secret_id": 25948,
+  "secret_word": "roscoe"
+}
