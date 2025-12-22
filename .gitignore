@@ -27,3 +27,4 @@ data/*.*
 # docs/data/*.json
 
 scripts/*
+!scripts/daily_commit_message.py
