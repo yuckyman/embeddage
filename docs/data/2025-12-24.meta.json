@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-24",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2218323070,
+  "secret_hash": "18b9be132ced0103a624dab56c8eab116916c45dcc1ba7d7e5f71bc4ef986dca",
+  "secret_id": 33126,
+  "secret_word": "powders"
+}
