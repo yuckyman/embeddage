@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-22",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1267277437,
+  "secret_hash": "93d2e2a82244bcf5359c3f4d254d77f6be91952ce4495a3b1a9c590b936789b5",
+  "secret_id": 16541,
+  "secret_word": "intestinal"
+}

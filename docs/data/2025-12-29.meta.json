@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-29",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1773155188,
+  "secret_hash": "7fc7ab2546a41dc48fb397edae1b41826ed82d2093cd99a80fedfa117996c97b",
+  "secret_id": 23681,
+  "secret_word": "kant"
+}

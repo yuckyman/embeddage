@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-23",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1534415765,
+  "secret_hash": "87bbe2d638fc51123b5b79e051a182256b0a23d39a5f8c17071837b76366443c",
+  "secret_id": 20012,
+  "secret_word": "sickle"
+}

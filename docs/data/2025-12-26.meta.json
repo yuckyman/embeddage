@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-26",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2338201289,
+  "secret_hash": "6b72d5f36b60639b0d4d9de9fd0a322cdf409368bbfebd6eb542bc9bb7c4d350",
+  "secret_id": 35380,
+  "secret_word": "gullible"
+}

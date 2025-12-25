@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-27",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1894422642,
+  "secret_hash": "8fa678799858a757f51470124eec6e395e363f61d1c1a067edc7a2b3c54c8e72",
+  "secret_id": 11603,
+  "secret_word": "weighs"
+}

@@ -1,0 +1,52 @@
+name: Daily build
+
+on:
+  schedule:
+    - cron: "15 5 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build daily artifacts (if data is available)
+        run: |
+          if [[ -f data/words.json && -f data/embeddings_normed.npy ]]; then
+            python scripts/build_day.py
+          else
+            echo "data/words.json or data/embeddings_normed.npy missing; skipping build"
+          fi
+
+      - name: Prepare daily commit message
+        id: daily_message
+        run: python scripts/daily_commit_message.py >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push daily artifacts
+        if: steps.daily_message.outputs.should_commit == 'true'
+        run: |
+          if [[ -z "$(git status --porcelain)" ]]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data
+          git commit -m "${{ steps.daily_message.outputs.message }}"
+          git push

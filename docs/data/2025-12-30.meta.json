@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-30",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 897633074,
+  "secret_hash": "1654dcd5202af6aaeda7615e6e69e19ba629dde5fde012598fd2cb2967b13b2f",
+  "secret_id": 1717,
+  "secret_word": "parliamentary"
+}

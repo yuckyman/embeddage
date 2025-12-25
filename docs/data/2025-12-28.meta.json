@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2025-12-28",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 343182249,
+  "secret_hash": "3707a1470b8ed60eadc2d5c3a69c44eebfe9594746fef346921910b3b14a3879",
+  "secret_id": 28824,
+  "secret_word": "dialed"
+}
