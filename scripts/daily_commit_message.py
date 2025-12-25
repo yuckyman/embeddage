@@ -40,10 +40,8 @@ def main() -> None:
         meta = json.load(meta_file)
 
     secret_word = meta.get("secret_word", "").strip()
-    if secret_word:
-        message = f"daily word: {secret_word} ({date_str})"
-    else:
-        message = f"daily word: {date_str}"
+    # commit message doesn't include secret word to keep it hidden
+    message = f"daily word: {date_str}"
 
     print("should_commit=true")
     print(f"message={message}")

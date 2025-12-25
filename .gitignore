@@ -27,7 +27,4 @@ data/*.*
 # docs/data/*.json
 
 scripts/*
-
-
-# logs
-logs/
+!scripts/daily_commit_message.py
