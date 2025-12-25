@@ -7,6 +7,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import type { Guess } from "./types.ts";
 
 const MAX_POINTS = 500;
+const HOVER_THRESHOLD = 0.15; // distance threshold for point hover detection
 
 export class SemanticScene {
   private scene: THREE.Scene;
@@ -37,12 +38,31 @@ export class SemanticScene {
   private autoRotateHeight = 2;
   private autoRotateVerticalPhase = 0;
   
+  // word tracking for hover tooltips
+  private localWords: string[] = [];
+  private outerWords: string[] = [];
+  
+  // raycasting for hover detection (desktop only)
+  private raycaster: THREE.Raycaster;
+  private mouse = new THREE.Vector2();
+  private tooltip: HTMLElement | null = null;
+  private _hoveredWord: string | null = null;
+  
+  /** get the currently hovered word (for external use) */
+  get hoveredWord(): string | null {
+    return this._hoveredWord;
+  }
+  
   constructor(container: HTMLElement) {
     // pure black scene
     this.scene = new THREE.Scene();
 
     // detect mobile
     this.isMobile = window.matchMedia("(max-width: 768px)").matches;
+    
+    // raycaster for hover detection
+    this.raycaster = new THREE.Raycaster();
+    this.raycaster.params.Points = { threshold: HOVER_THRESHOLD };
     
     // camera
     const aspect = container.clientWidth / container.clientHeight;
@@ -184,6 +204,14 @@ export class SemanticScene {
     this.scene.add(new THREE.Line(zGeom, axisMaterial));
     
     window.addEventListener("resize", this.onResize);
+    
+    // hover tooltip (desktop only)
+    if (!this.isMobile) {
+      this.createTooltip();
+      canvas.addEventListener("mousemove", this.onMouseMove);
+      canvas.addEventListener("mouseleave", this.onMouseLeave);
+    }
+    
     this.animate();
   }
   
@@ -197,6 +225,76 @@ export class SemanticScene {
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
+  };
+  
+  private createTooltip() {
+    this.tooltip = document.createElement("div");
+    this.tooltip.className = "scene-tooltip";
+    this.tooltip.style.cssText = `
+      position: fixed;
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 4px 8px;
+      font-family: monospace;
+      font-size: 12px;
+      border: 1px solid #333;
+      z-index: 1000;
+      display: none;
+      white-space: nowrap;
+    `;
+    document.body.appendChild(this.tooltip);
+  }
+  
+  private onMouseMove = (event: MouseEvent) => {
+    const canvas = this.renderer.domElement;
+    const rect = canvas.getBoundingClientRect();
+    
+    // normalize mouse coordinates to [-1, 1]
+    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    
+    // update raycaster
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+    
+    // check intersections with local and outer points
+    const localIntersects = this.raycaster.intersectObject(this.localPoints);
+    const outerIntersects = this.raycaster.intersectObject(this.outerPoints);
+    
+    let word: string | null = null;
+    
+    // prefer local points (they're more important)
+    if (localIntersects.length > 0 && localIntersects[0].index !== undefined) {
+      const idx = localIntersects[0].index;
+      if (idx < this.localWords.length) {
+        word = this.localWords[idx];
+      }
+    } else if (outerIntersects.length > 0 && outerIntersects[0].index !== undefined) {
+      const idx = outerIntersects[0].index;
+      if (idx < this.outerWords.length) {
+        word = this.outerWords[idx];
+      }
+    }
+    
+    this._hoveredWord = word;
+    
+    if (this.tooltip) {
+      if (word) {
+        this.tooltip.textContent = word;
+        this.tooltip.style.display = "block";
+        this.tooltip.style.left = `${event.clientX + 12}px`;
+        this.tooltip.style.top = `${event.clientY + 12}px`;
+      } else {
+        this.tooltip.style.display = "none";
+      }
+    }
+  };
+  
+  private onMouseLeave = () => {
+    this._hoveredWord = null;
+    if (this.tooltip) {
+      this.tooltip.style.display = "none";
+    }
   };
   
   private animate = () => {
@@ -229,6 +327,7 @@ export class SemanticScene {
     if (!guess.xyz) return;
     
     const { x, y, z } = guess.xyz;
+    const word = guess.word;
     
     if (guess.kind === "local") {
       const positions = this.localGeometry.attributes.position as THREE.BufferAttribute;
@@ -242,6 +341,9 @@ export class SemanticScene {
       colors.array[i] = guess.color.r / 255;
       colors.array[i + 1] = guess.color.g / 255;
       colors.array[i + 2] = guess.color.b / 255;
+      
+      // store word for hover tooltip
+      this.localWords.push(word);
       
       this.localCount++;
       this.localGeometry.setDrawRange(0, this.localCount);
@@ -266,6 +368,9 @@ export class SemanticScene {
       positions.array[i] = x;
       positions.array[i + 1] = y;
       positions.array[i + 2] = z;
+      
+      // store word for hover tooltip
+      this.outerWords.push(word);
       
       this.outerCount++;
       this.outerGeometry.setDrawRange(0, this.outerCount);
@@ -297,6 +402,17 @@ export class SemanticScene {
       window.clearTimeout(this.idleTimeout);
     }
     window.removeEventListener("resize", this.onResize);
+    
+    // clean up tooltip and mouse events
+    if (!this.isMobile) {
+      const canvas = this.renderer.domElement;
+      canvas.removeEventListener("mousemove", this.onMouseMove);
+      canvas.removeEventListener("mouseleave", this.onMouseLeave);
+      if (this.tooltip && this.tooltip.parentNode) {
+        this.tooltip.parentNode.removeChild(this.tooltip);
+      }
+    }
+    
     this.controls.dispose();
     this.renderer.dispose();
   }

@@ -6,6 +6,7 @@
  * - fetching words.json (once)
  * - fetching daily meta, rank, local_ids, xyz
  * - building typed arrays and lookup maps
+ * - date fallback when today's data is unavailable
  */
 
 import type { Meta, Artifacts } from "./types.ts";
@@ -21,6 +22,53 @@ export function getTodayNY(): string {
     day: "2-digit",
   });
   return formatter.format(new Date()); // "YYYY-MM-DD"
+}
+
+/**
+ * subtract N days from a date string (YYYY-MM-DD)
+ */
+function subtractDays(dateStr: string, days: number): string {
+  const date = new Date(dateStr + "T12:00:00Z"); // noon UTC to avoid DST issues
+  date.setUTCDate(date.getUTCDate() - days);
+  return date.toISOString().split("T")[0];
+}
+
+/**
+ * check if a date's data files exist (just check meta.json)
+ */
+async function dateExists(date: string): Promise<boolean> {
+  try {
+    const res = await fetch(`./data/${date}.meta.json`, { method: "HEAD" });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * find the most recent available date, starting from today and going backwards
+ * returns { date, isFallback } where isFallback is true if we had to go backwards
+ */
+export async function findAvailableDate(maxAttempts = 30): Promise<{ date: string; isFallback: boolean }> {
+  const today = getTodayNY();
+  
+  // try today first
+  if (await dateExists(today)) {
+    return { date: today, isFallback: false };
+  }
+  
+  console.log(`today's puzzle (${today}) not available, searching for most recent...`);
+  
+  // try previous dates
+  for (let i = 1; i < maxAttempts; i++) {
+    const candidate = subtractDays(today, i);
+    if (await dateExists(candidate)) {
+      console.log(`found available puzzle: ${candidate}`);
+      return { date: candidate, isFallback: true };
+    }
+  }
+  
+  throw new Error(`no puzzle data found in the last ${maxAttempts} days`);
 }
 
 /**

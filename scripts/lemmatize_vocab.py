@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-lemmatize the entire vocabulary using spaCy.
+lemmatize the entire vocabulary using LemmInflect + spaCy.
 
 this creates a full lemma mapping for all words in the vocabulary.
 run this after preprocess_glove.py has created data/words.json.
@@ -10,6 +10,10 @@ usage:
     
 output:
     - data/lemmas.json (word_to_lemma and lemma_to_words mappings)
+    
+requirements:
+    pip install spacy lemminflect
+    python -m spacy download en_core_web_sm
 """
 
 import json
@@ -45,6 +49,14 @@ def main():
         print("error: spaCy not installed")
         print("install it with: pip install spacy")
         print("then download the model: python -m spacy download en_core_web_sm")
+        sys.exit(1)
+    
+    # check if LemmInflect is available
+    try:
+        import lemminflect
+    except ImportError:
+        print("error: LemmInflect not installed")
+        print("install it with: pip install lemminflect")
         sys.exit(1)
     
     # check if model is available
@@ -107,5 +119,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 

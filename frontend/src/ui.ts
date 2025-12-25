@@ -41,6 +41,7 @@ export class GameUI {
   private leaderboardBody: HTMLElement;
   private leaderboardTitle: HTMLButtonElement;
   private leaderboardCollapsed = true;
+  private subtitleEl: HTMLElement | null = null;
 
   private guessCount = 0;
   private won = false;
@@ -149,6 +150,7 @@ export class GameUI {
     this.leaderboardRefresh = this.container.querySelector(
       ".leaderboard-refresh",
     ) as HTMLButtonElement;
+    this.subtitleEl = this.container.querySelector(".subtitle");
 
     // form submission
     this.form.addEventListener("submit", (e) => {
@@ -432,6 +434,19 @@ export class GameUI {
     this.leaderboard.classList.toggle("collapsed", collapsed);
     this.leaderboardTitle.setAttribute("aria-expanded", String(!collapsed));
     this.leaderboardBody.setAttribute("aria-hidden", String(collapsed));
+  }
+
+  /**
+   * show date info in subtitle (used for fallback dates)
+   */
+  showDateInfo(date: string, isFallback: boolean) {
+    if (!this.subtitleEl) return;
+    
+    if (isFallback) {
+      this.subtitleEl.innerHTML = `playing puzzle from <strong>${date}</strong> (today's not ready yet)`;
+    } else {
+      this.subtitleEl.textContent = "guess today's word! lower # is better";
+    }
   }
 
 }

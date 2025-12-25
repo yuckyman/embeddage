@@ -7,7 +7,7 @@
  * - handle guesses
  */
 
-import { getTodayNY, fetchArtifacts, buildWordToId } from "./loader.ts";
+import { findAvailableDate, fetchArtifacts, buildWordToId } from "./loader.ts";
 import { processGuess, isWinningGuess, normalizeGuess } from "./game.ts";
 import { SemanticScene } from "./scene.ts";
 import { GameUI } from "./ui.ts";
@@ -44,11 +44,28 @@ async function main() {
   const uiContainer = appEl.querySelector(".ui-container") as HTMLElement;
   
   // placeholder UI while loading
-  uiContainer.innerHTML = `<div class="loading-screen">loading today's puzzle...</div>`;
+  uiContainer.innerHTML = `<div class="loading-screen">loading puzzle...</div>`;
   
-  // determine today's date
-  const date = getTodayNY();
-  console.log(`loading puzzle for: ${date}`);
+  // find available date (today or most recent fallback)
+  let date: string;
+  let isFallbackDate = false;
+  
+  try {
+    const dateResult = await findAvailableDate();
+    date = dateResult.date;
+    isFallbackDate = dateResult.isFallback;
+    console.log(`loading puzzle for: ${date}${isFallbackDate ? " (fallback)" : ""}`);
+  } catch (err) {
+    console.error("failed to find available puzzle:", err);
+    uiContainer.innerHTML = `
+      <div class="error-screen">
+        <h2>no puzzle available</h2>
+        <p>${err instanceof Error ? err.message : "unknown error"}</p>
+        <p>check back later!</p>
+      </div>
+    `;
+    return;
+  }
 
   let artifacts: Artifacts;
   let wordToId: Map<string, number>;
@@ -436,6 +453,11 @@ async function main() {
     });
 
     ui.setPlayerName(playerNickname);
+    
+    // show fallback date notice if applicable
+    if (isFallbackDate) {
+      ui.showDateInfo(date, true);
+    }
 
     setMode(playMode);
 

@@ -4,6 +4,17 @@ scikit-learn>=1.3.0
 wordfreq>=3.0.0
 
 # optional: only needed for preprocessing (generating lemmas.json)
-# spaCy is NOT needed for runtime or server deployment
+# spaCy + LemmInflect are NOT needed for runtime or server deployment
+# 
+# to install for lemmatization preprocessing:
+#   pip install spacy lemminflect
+#   python -m spacy download en_core_web_sm
+#
+# LemmInflect provides improved lemmatization accuracy over spaCy alone:
+# - better OOV (out-of-vocabulary) handling
+# - more accurate irregular verb forms (ran->run, went->go)
+# - better plural noun handling (mice->mouse)
+#
 # spacy>=3.7.0
+# lemminflect>=0.2.3
 
