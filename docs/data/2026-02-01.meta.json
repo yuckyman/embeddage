@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-01",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3861982155,
+  "secret_hash": "f4bbfeafa293b778979462b0e1e36f4704b9b7d9d2a6232b169795069d1b88c0",
+  "secret_id": 23705,
+  "secret_word": "idyllic"
+}
