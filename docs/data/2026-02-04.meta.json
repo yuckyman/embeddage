@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-04",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1799754304,
+  "secret_hash": "70a9631d21254b4a7b28e869e465eb9e9d7af4abf7338217f1bbf74808f9b1ce",
+  "secret_id": 6080,
+  "secret_word": "chess"
+}
