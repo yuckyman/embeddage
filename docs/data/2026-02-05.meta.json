@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-05",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2537017485,
+  "secret_hash": "09040c6a97480d44094ff482a05b24ba82a48cb3811bab8b424fcf0cd5a628d7",
+  "secret_id": 11849,
+  "secret_word": "capitalist"
+}
