@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-06",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4231450528,
+  "secret_hash": "8e1692ad6b3ca6a6e32e66f82c4cc4dce62f5db7a454abd38f3fee26254ca4ed",
+  "secret_id": 16458,
+  "secret_word": "pigeon"
+}
