@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-07",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1343414108,
+  "secret_hash": "855359ba2680a9a98e33f8bed49fb42419190ef7553ae99d66ddbb796e5d2649",
+  "secret_id": 6815,
+  "secret_word": "janet"
+}
