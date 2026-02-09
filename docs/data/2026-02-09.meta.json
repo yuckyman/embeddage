@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-09",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3582997246,
+  "secret_hash": "edb09cf165d335a647d225bf33050c46744b2e5be57185a6e5f6fedb2886a238",
+  "secret_id": 17091,
+  "secret_word": "tuck"
+}
