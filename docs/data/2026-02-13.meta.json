@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-13",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2144632826,
+  "secret_hash": "50f4ec46827022a065e980a5a90f6e9817e3108492baa252e2de14e04517cc9c",
+  "secret_id": 43499,
+  "secret_word": "horoscope"
+}
