@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-14",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4055015321,
+  "secret_hash": "e20a49bf4334b104f31047d1fadebfcdedc44284f8a1204351fe2aab4d577503",
+  "secret_id": 13613,
+  "secret_word": "defy"
+}
