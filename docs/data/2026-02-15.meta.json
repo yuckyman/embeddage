@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-15",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3512134928,
+  "secret_hash": "fc172b2f74a0899d9dc8f776b69decac281dd2d1ce6dba317ded8b25fc775458",
+  "secret_id": 57,
+  "secret_word": "old"
+}
