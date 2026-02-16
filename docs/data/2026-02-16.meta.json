@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-16",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 762818113,
+  "secret_hash": "8f6dbacc07a57abd4bc6b9600901f8ac0d9eaf9a08892c4d4a9e52f2e035fcca",
+  "secret_id": 15355,
+  "secret_word": "manhunt"
+}
