@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-17",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4213583453,
+  "secret_hash": "8c6ee7351a67a47288ce309c71306248ad0e79c447b30b8074dc6be0672b264b",
+  "secret_id": 24262,
+  "secret_word": "mythic"
+}
