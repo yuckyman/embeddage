@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-19",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2118818179,
+  "secret_hash": "2b0a29fd927645d05eba695e85c53d1225131b175e65d5907ed56c3da2721b08",
+  "secret_id": 7097,
+  "secret_word": "semiconductor"
+}
