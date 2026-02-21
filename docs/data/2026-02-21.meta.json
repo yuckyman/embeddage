@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-21",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 355538627,
+  "secret_hash": "9196e58d2b2425c97c7f99196d37d05d958cad2530b7e45993a6558025b5d05c",
+  "secret_id": 4941,
+  "secret_word": "overtime"
+}
