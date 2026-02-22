@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-22",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1963948424,
+  "secret_hash": "7d090f7c197cf1269c17a2dba178cad0519758eb11a58df828590df68254c560",
+  "secret_id": 13964,
+  "secret_word": "tavern"
+}
