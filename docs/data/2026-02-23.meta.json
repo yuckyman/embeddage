@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-23",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2186058443,
+  "secret_hash": "79db323cd6b7749d1a660adf364faeaf6e8ea8e09426b10690c0414dd2155c80",
+  "secret_id": 19887,
+  "secret_word": "marxism"
+}
