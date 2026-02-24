@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-24",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2123776840,
+  "secret_hash": "5fc42ce73969ee6f5fe1c91cca938e06cebdd6ec6e4d296382794d138d94096c",
+  "secret_id": 29514,
+  "secret_word": "herr"
+}
