@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-25",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 180448939,
+  "secret_hash": "8ed9b52cf38abd7a98d9c44fb4ca0604473cd4bea96ac6468c71e52bfc3322ad",
+  "secret_id": 20904,
+  "secret_word": "meteor"
+}
