@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-02-27",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1623519990,
+  "secret_hash": "d73bf3e0d1396e7f11a9b58d6fd5718a12b3d3a7a83f408ba59fa5068c375371",
+  "secret_id": 18429,
+  "secret_word": "carp"
+}
