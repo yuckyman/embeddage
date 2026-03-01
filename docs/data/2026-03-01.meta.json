@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-01",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1320989659,
+  "secret_hash": "24bb2b7226624a651a1909660bff594ef5f1cc5b59056f4cc5b81a36c30b0083",
+  "secret_id": 21697,
+  "secret_word": "blazer"
+}
