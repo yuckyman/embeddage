@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-02",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2002662690,
+  "secret_hash": "927ba2a742b1e0289620504045a2019647be26e580bffd92f52e7847e75f7774",
+  "secret_id": 26028,
+  "secret_word": "curricula"
+}
