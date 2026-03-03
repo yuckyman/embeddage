@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-03",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2450459222,
+  "secret_hash": "0785e83f4909b1697d64cab092aad0e2b4f44dde2dd33670e9aa08758e41646d",
+  "secret_id": 24189,
+  "secret_word": "biscuit"
+}
