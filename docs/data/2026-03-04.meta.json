@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-04",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1186919986,
+  "secret_hash": "9fe55d9131dcff5dd11934e1b315cf4ecb01136aa6d9b3240a3c8c98c8b0c14e",
+  "secret_id": 12971,
+  "secret_word": "adolescent"
+}
