@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-05",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 936226374,
+  "secret_hash": "7540e1bedbd301cd82bdf0bc5b437fec4feba27753ddc55bbc71277b57d22ec3",
+  "secret_id": 11315,
+  "secret_word": "heartland"
+}
