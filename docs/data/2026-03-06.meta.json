@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-06",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 576250059,
+  "secret_hash": "e5c6967badb01d9f6b06beb51640ac9ab7749764d2a9d44ded5c977967d46b9c",
+  "secret_id": 13941,
+  "secret_word": "rounder"
+}
