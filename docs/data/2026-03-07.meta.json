@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-07",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2147140743,
+  "secret_hash": "24330efab87753a43278a86ee6821b06882012435a72fb57fe717d64e095fad9",
+  "secret_id": 16139,
+  "secret_word": "lena"
+}
