@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-08",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3771923756,
+  "secret_hash": "ab7252355a398842dc9a138b1d2a9987bd89e7a502222b62f58d397e8f099e50",
+  "secret_id": 6446,
+  "secret_word": "complain"
+}
