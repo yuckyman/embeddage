@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-10",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3306801098,
+  "secret_hash": "5ac2f4b7609658f590c126bb9244656c9a8e87ea152ce447f25d66176431569a",
+  "secret_id": 1211,
+  "secret_word": "alliance"
+}
