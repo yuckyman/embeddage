@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-11",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 192218326,
+  "secret_hash": "3f20fa5bf108b22df57115dcd63a4979ce515987bf87793ae2168f5c2e09ae3e",
+  "secret_id": 64645,
+  "secret_word": "todays"
+}
