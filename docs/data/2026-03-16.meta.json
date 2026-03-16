@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-16",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3069477284,
+  "secret_hash": "ee184b6644b24b44d46b1064030945a86d2517322b1e2790915285c0fbc8cf1c",
+  "secret_id": 7603,
+  "secret_word": "spacecraft"
+}
