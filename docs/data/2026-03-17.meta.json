@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-17",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4229476388,
+  "secret_hash": "cb9a694fd4d177c994c0f02e6e4ee3855e3cd17b2e674394d697dcb37fb26b09",
+  "secret_id": 9470,
+  "secret_word": "isle"
+}
