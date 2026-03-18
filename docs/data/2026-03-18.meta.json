@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-18",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 169492743,
+  "secret_hash": "e95aa2daa530b540e73d2355849172d1747c00235fdb2fa917a49f31089663c4",
+  "secret_id": 9857,
+  "secret_word": "pave"
+}
