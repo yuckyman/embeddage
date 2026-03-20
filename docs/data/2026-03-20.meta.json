@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-20",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 861645120,
+  "secret_hash": "562d33760934f3b907745ad921fa06a66503b42e089e14eaf706e28b1bb62055",
+  "secret_id": 15630,
+  "secret_word": "carmel"
+}
