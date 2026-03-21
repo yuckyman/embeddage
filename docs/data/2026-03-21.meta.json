@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-21",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1439946636,
+  "secret_hash": "4d165ff893e079e240ae52fe951fa3c8888ce1d4821b7850a5365c28c6226ced",
+  "secret_id": 25324,
+  "secret_word": "psychoanalysis"
+}
