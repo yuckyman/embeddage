@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-23",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3960906390,
+  "secret_hash": "f51ebda9f7033260b4220af5248354caa28d60c80a0eb3579d28e7b44a08222e",
+  "secret_id": 1958,
+  "secret_word": "plot"
+}
