@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-26",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 935657069,
+  "secret_hash": "2dc63a10fda9092038422df456c6ea25222a38d39583c1aa28473c5f6bcf3596",
+  "secret_id": 6762,
+  "secret_word": "renaissance"
+}
