@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-27",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1122325213,
+  "secret_hash": "1429e76bba3542d528db8cea6a04ab67487811138f1c4c7fbda2a1a66048b197",
+  "secret_id": 12295,
+  "secret_word": "decay"
+}
