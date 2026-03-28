@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-03-28",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2486742270,
+  "secret_hash": "f7d9a0164f4003380ee5f824e450b0e64bec3e2fdbb782ea81ff2b798cde6a37",
+  "secret_id": 3196,
+  "secret_word": "offense"
+}
