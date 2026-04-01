@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-01",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 71718392,
+  "secret_hash": "fa4d33e52fdf6b438a60133b6d16dd7ae81d443b26dab2aaaddf625c9e2f57d0",
+  "secret_id": 15064,
+  "secret_word": "appliance"
+}
