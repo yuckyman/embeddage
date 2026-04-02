@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-02",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1838807166,
+  "secret_hash": "8df5ad547a90f3395f0d2f93872b1644524537dad73e4b7a36d6efff66211881",
+  "secret_id": 24194,
+  "secret_word": "whispering"
+}
