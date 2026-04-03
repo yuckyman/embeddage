@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-03",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2825951977,
+  "secret_hash": "36ccbbc4af30f98eabb7a5817369e5201676a7eccd1191fb0788f1bb7c96f5f5",
+  "secret_id": 14121,
+  "secret_word": "satirical"
+}
