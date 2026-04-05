@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-05",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1733258425,
+  "secret_hash": "edb863225373f8c0e15e866c8569fd102c94660c2132b15373900e6ab4f39e35",
+  "secret_id": 25134,
+  "secret_word": "pesky"
+}
