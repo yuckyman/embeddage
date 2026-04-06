@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-06",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1910834551,
+  "secret_hash": "7e11a99176b1c4ab20394a6a66b615362247dd07a371796c27b5cc766678afbb",
+  "secret_id": 4605,
+  "secret_word": "tale"
+}
