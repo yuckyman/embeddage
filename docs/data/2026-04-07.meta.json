@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-07",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1298397370,
+  "secret_hash": "d1324664b41db61fe534f02cfa082a44c8cdaaad525c1e0d93287e17bb373611",
+  "secret_id": 13366,
+  "secret_word": "glamour"
+}
