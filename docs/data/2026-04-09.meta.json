@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-09",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3965955860,
+  "secret_hash": "6cf5adc714fee423c7635ffc42a6b5a61f232b76ba0fc7dc3cb440757a95d4ac",
+  "secret_id": 25898,
+  "secret_word": "grievous"
+}
