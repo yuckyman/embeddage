@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-11",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1433159586,
+  "secret_hash": "03b1b39b3cc380033b08a45a8e5b60ac4690abfdec61a8656884ed8b01fbc437",
+  "secret_id": 10213,
+  "secret_word": "hale"
+}
