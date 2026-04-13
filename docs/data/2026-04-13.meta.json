@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-13",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2543746295,
+  "secret_hash": "8678cd660722dd44c1c603e48ac6cdc9f79a850138f5498ff9ccc866147c04c0",
+  "secret_id": 12862,
+  "secret_word": "mistress"
+}
