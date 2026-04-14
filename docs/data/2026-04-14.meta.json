@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-14",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3443268481,
+  "secret_hash": "271f1be45a18afaa90458b4fe3e154f271f2dc380b38f4b7761ef49c8fc05fb8",
+  "secret_id": 4240,
+  "secret_word": "homer"
+}
