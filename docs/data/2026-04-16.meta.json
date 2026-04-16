@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-16",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3147327138,
+  "secret_hash": "8a237112edbb823f7723bf1ed0f839dc1ba7a01f6483207ad3ed437a2f992c02",
+  "secret_id": 26710,
+  "secret_word": "metamorphosis"
+}
