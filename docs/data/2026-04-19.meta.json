@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-19",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 280853999,
+  "secret_hash": "16eb1b26c2a3d9e884f4db9eaee7d4f8fb303f4f9e6040b493009036fd5b1f2f",
+  "secret_id": 15052,
+  "secret_word": "slippery"
+}
