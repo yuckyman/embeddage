@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-20",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2627878914,
+  "secret_hash": "503adce027aca31e8b2941cc175668f410dde9d2cfa552ab995d1cb757001553",
+  "secret_id": 7245,
+  "secret_word": "hun"
+}
