@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-21",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2343853901,
+  "secret_hash": "bfe44d0ba2aae31051cda0b0c21573c9ddadd76518e430582a9098d3ec131439",
+  "secret_id": 1083,
+  "secret_word": "cabinet"
+}
