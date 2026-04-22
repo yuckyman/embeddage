@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-22",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2209918050,
+  "secret_hash": "2de4d44ff57e433772c0ddcee461e9a24fe5bd1a55539702974f643233857f03",
+  "secret_id": 17202,
+  "secret_word": "freezer"
+}
