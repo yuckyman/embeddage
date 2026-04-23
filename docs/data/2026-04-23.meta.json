@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-23",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2873765497,
+  "secret_hash": "886f5f3e2d75d8b0a8040905cfae74b65b692de4513c22bce2085d9245c13478",
+  "secret_id": 4583,
+  "secret_word": "celebrity"
+}
