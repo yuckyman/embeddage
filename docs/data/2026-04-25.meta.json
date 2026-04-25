@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-25",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3410759896,
+  "secret_hash": "e86a14832b2f4193dbdf1a928640e2669a7fd1b16737f1b2dbdab666e16116ac",
+  "secret_id": 13605,
+  "secret_word": "citadel"
+}
