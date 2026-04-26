@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-26",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 629443875,
+  "secret_hash": "a6d8263b1ed1e1f318aa601700adbf7f5bc1d24b31c41c38f1b1c103b617b66f",
+  "secret_id": 4086,
+  "secret_word": "exposure"
+}
