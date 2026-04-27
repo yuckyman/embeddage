@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-27",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1558297977,
+  "secret_hash": "317fc1443eb4c43a2e22f9f4f732e1df262acb35279e9a109508be2d03ac3f2e",
+  "secret_id": 19814,
+  "secret_word": "bismarck"
+}
