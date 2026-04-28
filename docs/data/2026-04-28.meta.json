@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-28",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 52394905,
+  "secret_hash": "889b57bbea877b630279cb19d7dad032132b414771e89046d1b8ae8557a9b10a",
+  "secret_id": 21458,
+  "secret_word": "afterlife"
+}
