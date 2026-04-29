@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-04-29",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 659016910,
+  "secret_hash": "92190b35f748f144ad6e826f157dd9cb2184c3f16c1bb9937c60cf74fd8824e8",
+  "secret_id": 20715,
+  "secret_word": "durability"
+}
