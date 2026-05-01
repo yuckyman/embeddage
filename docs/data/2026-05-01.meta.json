@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-01",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 716770350,
+  "secret_hash": "8f354543b6864df51644d159225e63dde820c99c29561780af8dd050d38dd5b1",
+  "secret_id": 25064,
+  "secret_word": "coherence"
+}
