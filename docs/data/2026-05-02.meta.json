@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-02",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 262494771,
+  "secret_hash": "af899a6f5091d250519fb9725c0a08cadf94d3417c7cef06980b8ff04b677d2d",
+  "secret_id": 4642,
+  "secret_word": "ratio"
+}
