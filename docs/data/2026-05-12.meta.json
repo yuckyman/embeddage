@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-12",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1590803135,
+  "secret_hash": "345029b5816e9c7a834dfee6764129f063948b569ff18f2f0c99b16dbaac2fdc",
+  "secret_id": 15266,
+  "secret_word": "advertise"
+}
