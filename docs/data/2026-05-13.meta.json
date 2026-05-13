@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-13",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 349062267,
+  "secret_hash": "8a180caf025940713f8b70584831ac0e437a5744eeeafc30378fed533cbd5252",
+  "secret_id": 3381,
+  "secret_word": "carbon"
+}
