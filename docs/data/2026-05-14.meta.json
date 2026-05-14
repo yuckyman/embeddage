@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-14",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 949841719,
+  "secret_hash": "402fff667dcb249398cf0e3d697289c11bc5ab9f201c96667eaba8602eee1d15",
+  "secret_id": 7929,
+  "secret_word": "bethlehem"
+}
