@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-15",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2250767282,
+  "secret_hash": "dff7cf89b6007a4a23f82db2e95e770c227fd67e79ee7f0d2cbd13b1163c1e7e",
+  "secret_id": 27535,
+  "secret_word": "bead"
+}
