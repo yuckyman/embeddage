@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-16",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1640640201,
+  "secret_hash": "1527fd46b708bc4f361a29203048f677124aa6a02da440c72d59eef07dcd7975",
+  "secret_id": 13447,
+  "secret_word": "pius"
+}
