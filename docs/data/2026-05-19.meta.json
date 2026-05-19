@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-19",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 631030248,
+  "secret_hash": "d2330e7e794e7d0a7235e45c5a19af72016aae6935312d03c98a58198db5012a",
+  "secret_id": 26330,
+  "secret_word": "tourney"
+}
