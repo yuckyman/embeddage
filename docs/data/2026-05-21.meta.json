@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-21",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 668562386,
+  "secret_hash": "07e32ec0cecea80473906a4c2ff549a4b11e43c7ca7583d242f188b4f1252288",
+  "secret_id": 21450,
+  "secret_word": "tuscan"
+}
