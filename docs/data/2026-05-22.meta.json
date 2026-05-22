@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-22",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1968548686,
+  "secret_hash": "5da25b667893d4832e16effca5880c02cb8dfbdc98d7c4b211e0f226ccac5577",
+  "secret_id": 6323,
+  "secret_word": "isolation"
+}
