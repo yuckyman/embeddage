@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-23",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3014666432,
+  "secret_hash": "81f633a8639a57b993fd72ce8a15a63b61e1a504e15d71dce8b137ecd8be2e85",
+  "secret_id": 6511,
+  "secret_word": "prescription"
+}
