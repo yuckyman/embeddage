@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-24",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3708249733,
+  "secret_hash": "97c89035584508152f37c9ae6f7a0f8bcc72f053ad88c245ee4a8c605bd2e7c0",
+  "secret_id": 27318,
+  "secret_word": "millie"
+}
