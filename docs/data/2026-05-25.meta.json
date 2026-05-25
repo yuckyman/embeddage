@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-25",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3454646704,
+  "secret_hash": "f4755e70d9a7df3b636e94ec55c89541129032239f0979dda93c8d1d1bb0aef9",
+  "secret_id": 11632,
+  "secret_word": "calcium"
+}
