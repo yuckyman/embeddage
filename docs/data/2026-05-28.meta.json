@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-28",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 203517515,
+  "secret_hash": "5fd698a76d3e90a116d5e37d4c26652e8502b0a35702b40dff6c55b0737cf057",
+  "secret_id": 23978,
+  "secret_word": "stupidity"
+}
