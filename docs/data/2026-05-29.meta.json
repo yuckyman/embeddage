@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-29",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2093369753,
+  "secret_hash": "0eb6588253d3a86650ef378f0850defb9c1cfeb9c285f3509231784ccffbbc30",
+  "secret_id": 34223,
+  "secret_word": "valkyrie"
+}
