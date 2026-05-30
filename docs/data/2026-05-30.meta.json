@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-30",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2065101841,
+  "secret_hash": "9e1e51cfb9104f2b39a7cdcd9361256a9e221fb24fb5b3e0d1ce067609a493a2",
+  "secret_id": 26853,
+  "secret_word": "neuron"
+}
