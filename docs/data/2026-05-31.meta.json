@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-05-31",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3472327954,
+  "secret_hash": "75664925769824be89a67ade1fa233fe2bf2c1dcf266de501300bb25f90b5e11",
+  "secret_id": 16685,
+  "secret_word": "fortnight"
+}
