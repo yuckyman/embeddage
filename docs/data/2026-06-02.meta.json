@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-02",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1899742486,
+  "secret_hash": "fb366e24af8b0646ae9764bde6634df52ccc43147987fb7a108f80b8b18260ca",
+  "secret_id": 27761,
+  "secret_word": "tess"
+}
