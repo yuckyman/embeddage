@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-04",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3615877770,
+  "secret_hash": "52df16d5599e2caf1f8b7efd92d7c663cb435edf1ab0f73b7b9a034419c5b371",
+  "secret_id": 25006,
+  "secret_word": "reconnect"
+}
