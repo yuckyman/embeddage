@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-05",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3217373362,
+  "secret_hash": "74430270bf5b0fad335a7b8079ae3890aad0686e19333d351a63a51b3bf12c61",
+  "secret_id": 6431,
+  "secret_word": "racism"
+}
