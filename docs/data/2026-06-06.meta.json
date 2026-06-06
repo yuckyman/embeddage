@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-06",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 986133853,
+  "secret_hash": "bf5fdd0e1ae7332461f4ab70862fa6dedc08a11a4ff7deb6b10de1ff234b2fc3",
+  "secret_id": 18115,
+  "secret_word": "abby"
+}
