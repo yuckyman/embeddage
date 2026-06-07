@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-07",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1261209983,
+  "secret_hash": "6c0600dc2cb7e30457d5a705a8838dee4d9c6524e406b7a540f78bae32b409aa",
+  "secret_id": 26847,
+  "secret_word": "nutritious"
+}
