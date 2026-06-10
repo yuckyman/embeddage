@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-10",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3108689897,
+  "secret_hash": "9c15ecd45e7f515fc034c2ee3b383f9cbc09cd0ec9f6c2cbdca6e2a96c5dc981",
+  "secret_id": 9687,
+  "secret_word": "repay"
+}
