@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-12",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3061627188,
+  "secret_hash": "619c77eb9e9dba6d61d9c07fdf1695869ea3b17563c9205e814160609b7d0ce4",
+  "secret_id": 5517,
+  "secret_word": "noon"
+}
