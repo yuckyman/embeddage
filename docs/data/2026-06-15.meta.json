@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-15",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3730289655,
+  "secret_hash": "5cb34794cd98ac65b23ed5b992498a57a0afdce9b6ed7aea9c4ccf248696de78",
+  "secret_id": 6769,
+  "secret_word": "innovative"
+}
