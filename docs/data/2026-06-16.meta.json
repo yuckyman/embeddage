@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-16",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1272646628,
+  "secret_hash": "a877fc2c879b437c99d1879131e72291446ba1d66e15f996995c5148c62ac1c9",
+  "secret_id": 420,
+  "secret_word": "almost"
+}
