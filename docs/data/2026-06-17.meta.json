@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-17",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3075073255,
+  "secret_hash": "9dbc64c42976c2c86fdafcba1afebaefd8cd1f9509832db22b5a0c03bab84f8e",
+  "secret_id": 8585,
+  "secret_word": "bradford"
+}
