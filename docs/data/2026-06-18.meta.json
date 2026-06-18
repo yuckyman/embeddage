@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-18",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2064475501,
+  "secret_hash": "81184e78c6deeb03014b8235c957e9ff057a0a059da507860ea61b1b569180d8",
+  "secret_id": 14505,
+  "secret_word": "birch"
+}
