@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-19",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 167605119,
+  "secret_hash": "9cd40313173c419b6867c9422d1d79bc9abdd505f916a3d8bf5ce660c28221fc",
+  "secret_id": 14732,
+  "secret_word": "overrun"
+}
