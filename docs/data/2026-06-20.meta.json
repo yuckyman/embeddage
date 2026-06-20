@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-20",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3025930973,
+  "secret_hash": "79887eaf652afd22e72367e698a153d948bf7a198a812fcb899b1b74043102fc",
+  "secret_id": 22992,
+  "secret_word": "pausing"
+}
