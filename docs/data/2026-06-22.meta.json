@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-22",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 78836953,
+  "secret_hash": "267b1af5c5fb65a64772f5dccf0654ecb689fd32e80fbafe6df9e0d00283d407",
+  "secret_id": 1138,
+  "secret_word": "damage"
+}
