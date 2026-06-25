@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-25",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2767988741,
+  "secret_hash": "a4a30e5277574233dce1d4b69a61bedf89a480cba44cc1cb5caab250cfe0cc1d",
+  "secret_id": 21579,
+  "secret_word": "plunder"
+}
