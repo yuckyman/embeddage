@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-26",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2142712584,
+  "secret_hash": "301a63f855d28f654ebdac3fe075395dd552b792a45ea8fcf1f44a66c137c596",
+  "secret_id": 21835,
+  "secret_word": "perverse"
+}
