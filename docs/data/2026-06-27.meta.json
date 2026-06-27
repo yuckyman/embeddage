@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-27",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1067470353,
+  "secret_hash": "293afc0e31d7bc641374de912c1777267ce4205644fd2bbc13f05b5087623b34",
+  "secret_id": 12397,
+  "secret_word": "vick"
+}
