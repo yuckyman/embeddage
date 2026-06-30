@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-06-30",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3465074301,
+  "secret_hash": "430927264d26f3fa50101cff532007aa6fea4fcfa53f374b382f00513ca899b4",
+  "secret_id": 3511,
+  "secret_word": "francis"
+}
