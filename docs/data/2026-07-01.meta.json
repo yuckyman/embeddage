@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-01",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3896748690,
+  "secret_hash": "c47e1107202e82add05e1b843b6a5e85c93562607b986f0ca13cf38a3bf0986b",
+  "secret_id": 10859,
+  "secret_word": "kaiser"
+}
