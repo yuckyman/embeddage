@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-02",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1902096423,
+  "secret_hash": "450d0a1bd3eeb5c851ad819cf2cdb189c55dd819308179374eadd0e562852738",
+  "secret_id": 12687,
+  "secret_word": "unveil"
+}
