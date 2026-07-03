@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-03",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1999397208,
+  "secret_hash": "d69c3754b8a73c3a8f246234418f009a5232bb30a997623c5faf26521ce66ed6",
+  "secret_id": 2817,
+  "secret_word": "throw"
+}
