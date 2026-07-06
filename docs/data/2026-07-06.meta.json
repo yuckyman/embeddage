@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-06",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1815941305,
+  "secret_hash": "f53a2d3695f39c68e082cd04f06bf38e5e411c21a2e5f67516bfe7ffc0d01bc2",
+  "secret_id": 17435,
+  "secret_word": "cutoff"
+}
