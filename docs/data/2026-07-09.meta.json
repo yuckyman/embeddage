@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-09",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 565215930,
+  "secret_hash": "a34db069f234c2b03f5d170907cc06c1771fea0980911ebdf10dbcb6d7f769d0",
+  "secret_id": 14,
+  "secret_word": "president"
+}
