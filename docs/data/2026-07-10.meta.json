@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-10",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1953354848,
+  "secret_hash": "3c749961bab628bea6a7cf52ee0271cff7ada185c30684595980c08285acd43a",
+  "secret_id": 25200,
+  "secret_word": "craftsmanship"
+}
