@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-11",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 934828338,
+  "secret_hash": "10b2fb001fa1e8a0e14cf081db493e32ff87ad94fc25f2f233346e8b246c7d7b",
+  "secret_id": 12869,
+  "secret_word": "aluminium"
+}
