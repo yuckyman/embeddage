@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-12",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 320140638,
+  "secret_hash": "d77161eff6e3c090fdd9f88caf74b93887b823bef04e8a425ad78920c75ea894",
+  "secret_id": 17777,
+  "secret_word": "heroism"
+}
