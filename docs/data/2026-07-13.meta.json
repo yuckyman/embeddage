@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-13",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1207930605,
+  "secret_hash": "ec693b5f4cb754c5a45eab90a12e0e634f11585db201a87c92b5e4b4a009c277",
+  "secret_id": 5335,
+  "secret_word": "diversity"
+}
