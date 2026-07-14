@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-14",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1589914023,
+  "secret_hash": "d7d43f8b80460dc25aa9cddbd1e76df0bc9d9624ec10fa9f33b2cadc18b2ab68",
+  "secret_id": 8295,
+  "secret_word": "terminus"
+}
