@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-15",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 152435933,
+  "secret_hash": "8315efa7d574b90d7bf4a176cc1877215ea4150de606e0081679af4be56bce4a",
+  "secret_id": 23442,
+  "secret_word": "rosary"
+}
