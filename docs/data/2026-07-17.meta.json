@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-17",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1443473664,
+  "secret_hash": "3b2ec9fe643bbe765df894f489db73387cecd660fd4474e004815b77da432e37",
+  "secret_id": 13012,
+  "secret_word": "predator"
+}
