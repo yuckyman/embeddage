@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-18",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2536165849,
+  "secret_hash": "0981e6cabe5c9ae2ca3e278a2c49eff15d3df95a70612d1bef2e432781874cf2",
+  "secret_id": 5307,
+  "secret_word": "discount"
+}
