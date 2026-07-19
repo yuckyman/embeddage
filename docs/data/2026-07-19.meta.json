@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-19",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2331912395,
+  "secret_hash": "5c9c998218469da3fc3ff33b7c11816c1f1c7335d8e7be5755d6118d96c56cd4",
+  "secret_id": 14572,
+  "secret_word": "resilient"
+}
