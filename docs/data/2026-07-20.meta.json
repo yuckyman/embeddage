@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-20",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2706220680,
+  "secret_hash": "044a900af17a5509281994380dd2b3f8280b7105b23a782834ed2f5e04bc8695",
+  "secret_id": 20863,
+  "secret_word": "postcard"
+}
