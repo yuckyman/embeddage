@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-21",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1161766075,
+  "secret_hash": "c4425a87f72d7806e8557c68fd7499eb77ac9ac7cdf8a7393495c85f27ec5c45",
+  "secret_id": 28548,
+  "secret_word": "femininity"
+}
