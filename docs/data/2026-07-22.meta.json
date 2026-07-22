@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-22",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4170727862,
+  "secret_hash": "11de3ba320854c0068562c4feadc0cf6a9789e35f19daa725fb69bfbbeaa57a3",
+  "secret_id": 4859,
+  "secret_word": "muscle"
+}
