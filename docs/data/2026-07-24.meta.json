@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-24",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 452336597,
+  "secret_hash": "9b62e63926749c4e6274bc1cb9fd613b38b21d8e9c4ba4d611a95f1a69fcb768",
+  "secret_id": 16647,
+  "secret_word": "jacobson"
+}
