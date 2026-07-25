@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-25",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4163416525,
+  "secret_hash": "57c2113ab0c871ff5b5eb22e35bb75922d38b3bd159d9ff457b901c6091f6fdd",
+  "secret_id": 11335,
+  "secret_word": "freshly"
+}
