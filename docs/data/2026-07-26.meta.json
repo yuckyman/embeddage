@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-26",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1846989895,
+  "secret_hash": "918dff4733f3b6c3090e9ee7ffabdfb0468172761f502b8856017627e6587ab3",
+  "secret_id": 18512,
+  "secret_word": "prefect"
+}
