@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-27",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 38743138,
+  "secret_hash": "6b0d9924b1bf2a8a47b2b1657a7bf80e10befc5c67ad76f52a4ec8cae5e0faf1",
+  "secret_id": 16195,
+  "secret_word": "obituary"
+}
