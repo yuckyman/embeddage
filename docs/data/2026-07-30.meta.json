@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-30",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 83024656,
+  "secret_hash": "27042fc5bf4269ff4629a52c7a19c79396019c26dd98d9491d307770008b5ff6",
+  "secret_id": 23843,
+  "secret_word": "comprehension"
+}
