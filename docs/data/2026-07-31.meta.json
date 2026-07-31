@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-07-31",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 922009646,
+  "secret_hash": "db48a1ca17268e7f4da312dbaef9d3eb9836dd9f0513e14418619b30d145a5b0",
+  "secret_id": 8201,
+  "secret_word": "oracle"
+}
