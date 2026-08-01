@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-01",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 195682132,
+  "secret_hash": "b098e0dcde4fbbcf9a624d02ed2c49f1d918d15ce1030291d163b0f41d8dd03f",
+  "secret_id": 12807,
+  "secret_word": "downfall"
+}
