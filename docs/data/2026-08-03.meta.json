@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-03",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2267025854,
+  "secret_hash": "1678ee1f84d3cb0375440c3cc19d507a8803f652804a109b0bae4a472d2a5203",
+  "secret_id": 19254,
+  "secret_word": "furiously"
+}
