@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-04",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 237469308,
+  "secret_hash": "5f1e2fe67b636e276708445bc647bf57b430cc4521be55291160d70b51b74af4",
+  "secret_id": 10723,
+  "secret_word": "devon"
+}
