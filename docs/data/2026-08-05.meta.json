@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-05",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3046227585,
+  "secret_hash": "58cf81782b76062dbccc6fec836dae2338e5773f409e9ab3df7e2c8fd52d238f",
+  "secret_id": 4296,
+  "secret_word": "der"
+}
