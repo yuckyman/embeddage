@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-06",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3035989134,
+  "secret_hash": "728cfd4ed05fced722f301433453b62d06b987ead5914f37e24c395676983388",
+  "secret_id": 22133,
+  "secret_word": "trove"
+}
