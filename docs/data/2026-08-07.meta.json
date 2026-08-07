@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-07",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3174960772,
+  "secret_hash": "23b1cec18f7075184083d516ec343f8eb05aa8eca1171b527c2a047ce5b48adf",
+  "secret_id": 14788,
+  "secret_word": "spokane"
+}
