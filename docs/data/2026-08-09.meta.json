@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-09",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1686304336,
+  "secret_hash": "9fb0f2d88c87a047272ff255b33cc7a1869a209a171a21e66aa08c786feecf25",
+  "secret_id": 7818,
+  "secret_word": "sebastian"
+}
