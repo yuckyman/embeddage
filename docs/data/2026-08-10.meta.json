@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-10",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 90660436,
+  "secret_hash": "a0cb207297b7b61374c2454c7fd676d8c4dea523aa23c485114911468d70061b",
+  "secret_id": 21942,
+  "secret_word": "dunlop"
+}
