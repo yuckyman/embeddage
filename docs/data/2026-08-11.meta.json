@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-11",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2367777141,
+  "secret_hash": "b443b82f6e958590f3cc8bb6f18bd0c6fd5f67582b94afc6309d76e8d886116e",
+  "secret_id": 69,
+  "secret_word": "way"
+}
