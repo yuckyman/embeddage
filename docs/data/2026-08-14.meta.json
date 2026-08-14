@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-14",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1761686459,
+  "secret_hash": "80de664b97aa6b2f25186b00451c40a2806a146d973e1c8b35c8210f04afe951",
+  "secret_id": 7841,
+  "secret_word": "monarch"
+}
