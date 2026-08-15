@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-15",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2065365360,
+  "secret_hash": "f5773639e429260f2726d025ff4bad1ce8079042ddfa331b9db6c966989f5214",
+  "secret_id": 3622,
+  "secret_word": "wright"
+}
