@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-16",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2479403310,
+  "secret_hash": "998b0164c9f1bfcaa51c9e04818011d49d8616b107821d85f7e48f5e66375e39",
+  "secret_id": 17618,
+  "secret_word": "landowner"
+}
