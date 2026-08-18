@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-18",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 821201534,
+  "secret_hash": "616fdf87ad5117a09f81f3e27eefff2e15498d4d7c1f06eda4def0a076480651",
+  "secret_id": 27078,
+  "secret_word": "repentance"
+}
