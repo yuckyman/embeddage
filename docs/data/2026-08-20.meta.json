@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-20",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3390111496,
+  "secret_hash": "6de910a93aefc9f0417b5e31f68031270f8144f3ac91abcba1f6c9825fad02e4",
+  "secret_id": 19865,
+  "secret_word": "perseverance"
+}
