@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-21",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4193360203,
+  "secret_hash": "36121601669d21b28d1638d8a75b9a50a03b5c9154aca7837ad375f9d096a1a0",
+  "secret_id": 28357,
+  "secret_word": "sew"
+}
