@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-22",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 864023344,
+  "secret_hash": "862cb1e55741ce897d7d723196bf83bb6373825d7a9bff4c3347eac2e8521b5f",
+  "secret_id": 298,
+  "secret_word": "give"
+}
