@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-23",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2757138850,
+  "secret_hash": "e709ef79232d99f223052a246c6c64b59ddf1fdfea9fcac18b08f4b51b67b904",
+  "secret_id": 8768,
+  "secret_word": "destiny"
+}
