@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-24",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 211437575,
+  "secret_hash": "a3c8cb8e40183f8a2f32d2234359ad5b303cc3a97c4dcd1ed848b987602ee40e",
+  "secret_id": 3908,
+  "secret_word": "exile"
+}
