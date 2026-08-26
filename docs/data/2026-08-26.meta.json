@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-26",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1207080728,
+  "secret_hash": "938d1739c73a2d6057dc2a69883c1a238aed8f90f2ad401921a663df537d5891",
+  "secret_id": 18598,
+  "secret_word": "applaud"
+}
