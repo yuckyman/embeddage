@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-27",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1829182414,
+  "secret_hash": "00f1ffb7c5ef2073be47ceda45f4d878c94170965c2296d832600b4cf2efedb3",
+  "secret_id": 15193,
+  "secret_word": "informally"
+}
