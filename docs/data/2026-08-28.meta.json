@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-28",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 804321878,
+  "secret_hash": "ba80b66a9e15bb592966e27a620bf8d0c48832cba1d718f50b896d990a76d927",
+  "secret_id": 26053,
+  "secret_word": "masculinity"
+}
