@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-29",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3845092906,
+  "secret_hash": "e5f26fa56d380f96e9af83f48f4d1e0dfb62253f814e414992de1e5c20d70935",
+  "secret_id": 12975,
+  "secret_word": "delicious"
+}
