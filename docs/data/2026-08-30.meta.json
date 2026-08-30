@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-30",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1908690463,
+  "secret_hash": "22876cf1f86e2944c68571920be6d99a0eb2a6fee099d84023493e5c2164ac9c",
+  "secret_id": 5564,
+  "secret_word": "brooks"
+}
