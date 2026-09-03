@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-03",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 899571613,
+  "secret_hash": "3ed6e83ac5912f8e221cec6f544e25f36d5ae14f80445952fe05db0e8f473505",
+  "secret_id": 5585,
+  "secret_word": "governance"
+}
