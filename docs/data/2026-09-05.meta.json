@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-05",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 923734616,
+  "secret_hash": "670cf48c4d7eabe278d5380c2381792686100de04a732a4a7017500014fc352e",
+  "secret_id": 16429,
+  "secret_word": "melodic"
+}
