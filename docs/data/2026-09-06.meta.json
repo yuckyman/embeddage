@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-06",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 440426285,
+  "secret_hash": "702c9cc3c4dc318097dfcf33abe7cac984f5c17c2fc990beadebfeb577688997",
+  "secret_id": 17910,
+  "secret_word": "loren"
+}
