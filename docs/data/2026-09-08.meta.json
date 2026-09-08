@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-08",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 4220223862,
+  "secret_hash": "1813670ff0e135d85821df28f04c7e0c456cb6a82925c880bf1d2a5cc0cfeb2f",
+  "secret_id": 16816,
+  "secret_word": "tutu"
+}
