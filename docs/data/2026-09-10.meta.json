@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-10",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 3062535471,
+  "secret_hash": "9eef91aa38c020e82d62b745f703437a2e9e51a77e6e56b8bf3208582b7697f8",
+  "secret_id": 3342,
+  "secret_word": "successor"
+}
