@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-11",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 2321197455,
+  "secret_hash": "eff00d16816ae94791e0f8fa76e0404dd3b52f4e0978710688523996ed5d2638",
+  "secret_id": 22886,
+  "secret_word": "beak"
+}
