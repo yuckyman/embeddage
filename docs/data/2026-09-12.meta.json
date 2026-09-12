@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-12",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 1308566829,
+  "secret_hash": "e107ff2d2955d7e3f8073c004b9379f8f73ed72cb5ee43f969f89f36cd9a5edb",
+  "secret_id": 18647,
+  "secret_word": "aspirin"
+}
