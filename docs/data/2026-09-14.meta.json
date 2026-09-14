@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-14",
+  "day_boundary_tz": "America/New_York",
+  "k": 512,
+  "vocab_size": 151002,
+  "embed_dim": 100,
+  "projection_method": "pca",
+  "projection_params": {},
+  "projection_seed": 594911198,
+  "secret_hash": "25caf0799ad537c8cadb931fe87ab91947d8c35527e1367333d3c101b4fc2109",
+  "secret_id": 24754,
+  "secret_word": "doughnut"
+}
